@@ -5,6 +5,7 @@ import {
 import { carServices } from './car.service';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
+import httpStatus from 'http-status';
 
 /* --------------------Add a new car ----------------- */
 const addNewCar = catchAsync(async (req, res) => {
@@ -30,7 +31,7 @@ const getAllCars = catchAsync(async (req, res) => {
 
   const result = await carServices.getAllCarsFromDB();
 
-  sendResponse(res, 200, {
+  sendResponse(res, httpStatus.OK, {
     message: 'Cars retrieved successfully',
     data: result,
   });
@@ -41,7 +42,7 @@ const getSingleCar = catchAsync(async (req, res) => {
   const { carId } = req.params;
   const result = await carServices.getSingleCarFromDB(carId);
 
-  sendResponse(res, 200, {
+  sendResponse(res, httpStatus.OK, {
     message: 'Car retrieved successfully',
     data: result,
   });
@@ -56,7 +57,7 @@ const updateACar = catchAsync(async (req, res) => {
   const result = await carServices.updateSingleCarFromDB(carId, carUpdates);
 
   /* ----Send success response to frontend ------ */
-  sendResponse(res, 200, {
+  sendResponse(res, httpStatus.OK, {
     message: 'Car updated successfully',
     data: result,
   });
@@ -68,7 +69,7 @@ const deleteSingleCar = catchAsync(async (req, res) => {
   await carServices.deleteSingleCarFromDB(carId);
 
   /* ----Send success response to frontend ------ */
-  sendResponse(res, 200, {
+  sendResponse(res, httpStatus.OK, {
     message: 'Car deleted successfully',
     data: {},
   });

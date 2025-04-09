@@ -31,7 +31,7 @@ const moduleRoutes = [
     route: CarRoutes,
   },
   {
-    path: '/order',
+    path: '/orders',
     route: OrderRoutes,
   },
 ];
