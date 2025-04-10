@@ -4,7 +4,6 @@ export type TUserName = {
   lastName: string;
 };
 
-
 export const uniqueImageNameGenerator = (userName: TUserName, id: string) => {
   // -------- Generate a unique username
   let fullName = '';

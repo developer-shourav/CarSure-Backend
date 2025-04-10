@@ -5,7 +5,11 @@ import { CarValidation } from './car.validation';
 const router = express.Router();
 
 /* -------Create a Car */
-router.post('/', validateRequest(CarValidation.carValidationSchema), CarControllers.addNewCar);
+router.post(
+  '/',
+  validateRequest(CarValidation.carValidationSchema),
+  CarControllers.addNewCar,
+);
 
 /* -------Get All Cars */
 router.get('/', CarControllers.getAllCars);
@@ -14,7 +18,11 @@ router.get('/', CarControllers.getAllCars);
 router.get('/:carId', CarControllers.getSingleCar);
 
 /* -------Update A Car */
-router.patch('/:carId', validateRequest(CarValidation.carUpdateValidationSchema), CarControllers.updateACar);
+router.patch(
+  '/:carId',
+  validateRequest(CarValidation.carUpdateValidationSchema),
+  CarControllers.updateACar,
+);
 
 /* -------Delete A Car */
 router.delete('/:carId', CarControllers.deleteSingleCar);

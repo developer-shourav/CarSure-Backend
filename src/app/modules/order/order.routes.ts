@@ -6,7 +6,11 @@ import { OrderValidation } from './order.validation';
 const router = express.Router();
 
 /* -------Create an Order */
-router.post('/', validateRequest(OrderValidation.orderValidationSchema), OrderControllers.createAnOrder);
+router.post(
+  '/',
+  validateRequest(OrderValidation.orderValidationSchema),
+  OrderControllers.createAnOrder,
+);
 
 /* -------Get total revenue */
 router.get('/revenue', OrderControllers.getRevenue);
@@ -18,7 +22,11 @@ router.get('/', OrderControllers.getAllOrders);
 router.get('/:orderId', OrderControllers.getAnOrder);
 
 /* -------Update Single order */
-router.patch('/:orderId', validateRequest(OrderValidation.orderUpdateValidationSchema), OrderControllers.updateAnOrder);
+router.patch(
+  '/:orderId',
+  validateRequest(OrderValidation.orderUpdateValidationSchema),
+  OrderControllers.updateAnOrder,
+);
 
 /* -------Delete an order */
 router.delete('/:orderId', OrderControllers.deleteAnOrder);

@@ -9,9 +9,7 @@ const addNewCar = catchAsync(async (req, res) => {
   const addNewCarData = req.body;
 
   /* ----------Store data to Database -------- */
-  const result = await carServices.addNewCarIntoDB(
-    addNewCarData
-  );
+  const result = await carServices.addNewCarIntoDB(addNewCarData);
 
   sendResponse(res, 201, {
     message: 'Car created successfully',
@@ -21,7 +19,6 @@ const addNewCar = catchAsync(async (req, res) => {
 
 /* -----------------Get All Cars------------------------- */
 const getAllCars = catchAsync(async (req, res) => {
-
   const result = await carServices.getAllCarsFromDB();
 
   sendResponse(res, httpStatus.OK, {
@@ -66,7 +63,7 @@ const deleteSingleCar = catchAsync(async (req, res) => {
     message: 'Car deleted successfully',
     data: {},
   });
-})
+});
 
 export const CarControllers = {
   addNewCar,

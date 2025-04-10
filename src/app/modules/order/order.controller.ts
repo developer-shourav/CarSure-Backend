@@ -5,7 +5,6 @@ import httpStatus from 'http-status';
 
 /* ------------------- Create a New Order ------------------- */
 const createAnOrder = catchAsync(async (req, res) => {
-
   const orderData = req.body;
 
   // ---------Create a new order
@@ -59,7 +58,10 @@ const updateAnOrder = catchAsync(async (req, res) => {
   const OrderUpdates = req.body;
 
   //----- Update the car in the database-----
-  const result = await OrderServices.updateSingleOrderFromDB(orderId, OrderUpdates);
+  const result = await OrderServices.updateSingleOrderFromDB(
+    orderId,
+    OrderUpdates,
+  );
 
   /* ----Send success response to frontend ------ */
   sendResponse(res, httpStatus.OK, {

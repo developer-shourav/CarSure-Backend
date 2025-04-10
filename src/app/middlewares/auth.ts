@@ -23,7 +23,6 @@ const auth = (...requiredRoles: TUserRole[]) => {
         TOKEN,
         config.jwt_access_secret as string,
       ) as JwtPayload;
-
     } catch (err) {
       throw new AppError(httpStatus.UNAUTHORIZED, 'Unauthorized!');
     }
