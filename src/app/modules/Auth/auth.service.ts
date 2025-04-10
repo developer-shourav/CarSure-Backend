@@ -13,13 +13,14 @@ import { hostImageToCloudinary } from '../../utils/hostImageToCloudinary';
 /* --------Logic For Register an User ---------- */
 const registerUserIntoDB = async (imageFileDetails: any,  payload: TUser) => {
 
-  const result = await User.create(payload);
   if (imageFileDetails) {
     const imagePath = imageFileDetails?.path;
     const { imageName } = uniqueUserImageNameGenerator(payload.name);
     const { secure_url } = await hostImageToCloudinary(imageName, imagePath);
     payload.profileImg = secure_url as string;
   }
+  
+  const result = await User.create(payload);
 
   if (!result) {
     throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create User');
