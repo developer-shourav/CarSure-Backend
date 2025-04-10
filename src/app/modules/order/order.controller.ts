@@ -1,24 +1,15 @@
-import { Request, Response } from 'express';
-import { orderValidationSchema } from './order.validation';
 import { OrderServices } from './order.service';
-import { Types } from 'mongoose';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import httpStatus from 'http-status';
 
 /* ------------------- Create a New Order ------------------- */
-const createAnOrder = catchAsync(async (req: Request, res: Response) => {
-  // ---------Validate the request body
-  const orderData = orderValidationSchema.parse(req.body);
+const createAnOrder = catchAsync(async (req, res) => {
 
-  // ---------Convert car to ObjectId
-  const parsedOrderData = {
-    ...orderData,
-    car: new Types.ObjectId(orderData.car),
-  };
+  const orderData = req.body;
 
   // ---------Create a new order
-  const result = await OrderServices.createNewOrder(parsedOrderData);
+  const result = await OrderServices.createNewOrder(orderData);
 
   // Send a success response
   sendResponse(res, httpStatus.OK, {
@@ -28,7 +19,7 @@ const createAnOrder = catchAsync(async (req: Request, res: Response) => {
 });
 
 /* ------------------- Calculate Revenue ------------------- */
-const getRevenue = catchAsync(async (req: Request, res: Response) => {
+const getRevenue = catchAsync(async (req, res) => {
   // ------Calculate revenue
   const totalRevenue = await OrderServices.calculateTotalRevenue();
 
@@ -40,7 +31,7 @@ const getRevenue = catchAsync(async (req: Request, res: Response) => {
 });
 
 /* ------------------- Get All Orders ------------------- */
-const getAllOrders = catchAsync(async (req: Request, res: Response) => {
+const getAllOrders = catchAsync(async (req, res) => {
   const result = await OrderServices.getAllOrdersFromDB();
 
   /* ----Send success response to frontend ------ */
@@ -51,7 +42,7 @@ const getAllOrders = catchAsync(async (req: Request, res: Response) => {
 });
 
 /* ------------------- Get Single Order ------------------- */
-const getAnOrder = catchAsync(async (req: Request, res: Response) => {
+const getAnOrder = catchAsync(async (req, res) => {
   const { orderId } = req.params;
   const result = await OrderServices.getAnOrderFromDB(orderId);
 
@@ -63,7 +54,7 @@ const getAnOrder = catchAsync(async (req: Request, res: Response) => {
 });
 
 /* ------------------- Delete an order ------------------- */
-const deleteAnOrder = catchAsync(async (req: Request, res: Response) => {
+const deleteAnOrder = catchAsync(async (req, res) => {
   const { orderId } = req.params;
   await OrderServices.deleteAnOrderFromDB(orderId);
 

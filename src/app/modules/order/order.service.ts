@@ -5,7 +5,7 @@ import { Order } from './order.model';
 /* ----------- Logic for Create a new order and manage inventory ----------- */
 const createNewOrder = async (orderData: TOrder) => {
   //----------- Find the car by its ID
-  const car = await Car.findById(orderData.car);
+  const car = await Car.findById(orderData.productDetails);
   if (!car) {
     throw new Error('Car not found!');
   }
@@ -68,6 +68,21 @@ const getAnOrderFromDB = async (orderId: string) => {
   return result;
 };
 
+/* -------------Logic for update an Order------------------ */
+const updateSingleOrderFromDB = async (
+  carId: string,
+  orderUpdates: Partial<TOrder>,
+) => {
+  const updatedCar = await Order.findByIdAndUpdate(
+    carId,
+    orderUpdates,
+    { new: true, runValidators: true }, // Return the updated document and apply validation
+  );
+  if (!updatedCar) {
+    throw new Error('Order not found!');
+  }
+  return updatedCar;
+};
 /* ---------- Logic for Delete an Order from Database  ---------- */
 const deleteAnOrderFromDB = async (orderId: string) => {
   const result = await Order.findByIdAndDelete({ _id: orderId });
@@ -83,5 +98,6 @@ export const OrderServices = {
   calculateTotalRevenue,
   getAllOrdersFromDB,
   getAnOrderFromDB,
+  updateSingleOrderFromDB,
   deleteAnOrderFromDB,
 };

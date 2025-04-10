@@ -1,10 +1,12 @@
 import express from 'express';
 import { OrderControllers } from './order.controller';
+import validateRequest from '../../middlewares/validateRequest';
+import { OrderValidation } from './order.validation';
 
 const router = express.Router();
 
 /* -------Create an Order */
-router.post('/', OrderControllers.createAnOrder);
+router.post('/',  validateRequest(OrderValidation.orderValidationSchema), OrderControllers.createAnOrder);
 
 /* -------Get total revenue */
 router.get('/revenue', OrderControllers.getRevenue);
