@@ -70,11 +70,11 @@ const getAnOrderFromDB = async (orderId: string) => {
 
 /* -------------Logic for update an Order------------------ */
 const updateSingleOrderFromDB = async (
-  carId: string,
+  orderId: string,
   orderUpdates: Partial<TOrder>,
 ) => {
   const updatedCar = await Order.findByIdAndUpdate(
-    carId,
+    orderId,
     orderUpdates,
     { new: true, runValidators: true }, // Return the updated document and apply validation
   );

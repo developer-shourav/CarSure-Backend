@@ -53,6 +53,21 @@ const getAnOrder = catchAsync(async (req, res) => {
   });
 });
 
+/* -----------------Update An Order------------------------- */
+const updateAnOrder = catchAsync(async (req, res) => {
+  const { orderId } = req.params;
+  const OrderUpdates = req.body;
+
+  //----- Update the car in the database-----
+  const result = await OrderServices.updateSingleOrderFromDB(orderId, OrderUpdates);
+
+  /* ----Send success response to frontend ------ */
+  sendResponse(res, httpStatus.OK, {
+    message: 'Order updated successfully',
+    data: result,
+  });
+});
+
 /* ------------------- Delete an order ------------------- */
 const deleteAnOrder = catchAsync(async (req, res) => {
   const { orderId } = req.params;
@@ -70,5 +85,6 @@ export const OrderControllers = {
   getRevenue,
   getAllOrders,
   getAnOrder,
+  updateAnOrder,
   deleteAnOrder,
 };
