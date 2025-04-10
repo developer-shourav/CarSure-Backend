@@ -5,7 +5,7 @@ import sendResponse from '../../utils/sendResponse';
 const createUser = catchAsync(async (req, res) => {
   const imageFileDetails = req.file;
   const userData = req.body;
-  
+
   // will call service function to send this data
   const result = await UserServices.createUserIntoDB(imageFileDetails, userData);
 
@@ -15,6 +15,18 @@ const createUser = catchAsync(async (req, res) => {
   });
 });
 
+/* ----------------Get All Users------------------- */
+
+const getAllUsers = catchAsync(async (req, res) => {
+
+  const result = await UserServices.getAllUsersFromDB();
+  sendResponse(res, 201, {
+    message: 'Users retrieved successfully',
+    data: result,
+  });
+});
+
 export const UserControllers = {
   createUser,
+  getAllUsers
 };
