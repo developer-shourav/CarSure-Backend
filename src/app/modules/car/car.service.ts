@@ -1,19 +1,35 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import httpStatus from 'http-status';
+import AppError from '../../errors/AppError';
+import { hostImageToCloudinary } from '../../utils/hostImageToCloudinary';
 import { TCar } from './car.interface';
 import { Car } from './car.model';
+import { uniqueCarImageNameGenerator } from '../../utils/uniqueImageNameGenerator';
 
 /* --------Logic For add a car to DataBase------ */
-const addNewCarIntoDB = async (carData: TCar) => {
+const addNewCarIntoDB = async (imageFileDetails: any, carData: TCar) => {
   // Check The same car already exist or not
   if (
     await Car.isCarExists(
+      carData.carName,
       carData.brand,
       carData.model,
       carData.year,
       carData.category,
     )
   ) {
-    throw new Error('Car already exist!');
+    throw new AppError(httpStatus.CONFLICT, 'Car already exist!');
   }
+
+  // ----------send Image to the cloudinary----------
+  if (imageFileDetails) {
+    const imagePath = imageFileDetails?.path;
+    const { imageName } = uniqueCarImageNameGenerator(carData.carName, carData.brand, carData.model, carData.year);
+    const { secure_url } = await hostImageToCloudinary(imageName, imagePath);
+
+    carData.productImg = secure_url as string;
+  }
+
   const result = await Car.create(carData);
   return result;
 };
@@ -27,7 +43,7 @@ const getAllCarsFromDB = async () => {
 const getSingleCarFromDB = async (carId: string) => {
   const result = await Car.findOne({ _id: carId });
   if (!result) {
-    throw new Error('Car not found!');
+    throw new AppError( httpStatus.NOT_FOUND ,'Car not found!');
   }
   return result;
 };
@@ -43,7 +59,7 @@ const updateSingleCarFromDB = async (
     { new: true, runValidators: true }, // Return the updated document and apply validation
   );
   if (!updatedCar) {
-    throw new Error('Car not found!');
+    throw new AppError(httpStatus.NOT_FOUND ,'Car not found!');
   }
   return updatedCar;
 };
@@ -52,7 +68,7 @@ const updateSingleCarFromDB = async (
 const deleteSingleCarFromDB = async (carId: string) => {
   const deleteCar = await Car.findByIdAndDelete({ _id: carId });
   if (!deleteCar) {
-    throw new Error('Car not found!');
+    throw new AppError(httpStatus.NOT_FOUND, 'Car not found!');
   }
   return deleteCar;
 };

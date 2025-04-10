@@ -6,10 +6,11 @@ import httpStatus from 'http-status';
 /* --------------------Add a new car ----------------- */
 const addNewCar = catchAsync(async (req, res) => {
   /* ------Raw data of the request------ */
+  const imageFileDetails = req.file;
   const addNewCarData = req.body;
 
   /* ----------Store data to Database -------- */
-  const result = await carServices.addNewCarIntoDB(addNewCarData);
+  const result = await carServices.addNewCarIntoDB(imageFileDetails, addNewCarData);
 
   sendResponse(res, 201, {
     message: 'Car created successfully',

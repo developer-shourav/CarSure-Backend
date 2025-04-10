@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 // --------------Define a zod schema for the `Car` model--------------
 const carValidationSchema = z.object({
+  carName: z.string().min(1, 'Name is required'),
   brand: z.string().min(1, 'Brand is required'),
   model: z.string().min(1, 'Model is required'),
   year: z.number().int().gte(1800, 'Year must be 1800 or later'), // Year is a whole number and at least 1800
@@ -15,6 +16,7 @@ const carValidationSchema = z.object({
 // -------------For Update Data of car -----------
 
 const carUpdateValidationSchema = z.object({
+  carName: z.string().min(1, 'Name is required').optional(),
   brand: z.string().min(1, 'Brand is required').optional(),
   model: z.string().min(1, 'Model is required').optional(),
   year: z.number().int().gte(1800, 'Year must be 1800 or later').optional(), // Year is a whole number and at least 1800

@@ -1,44 +1,33 @@
-import mongoose from 'mongoose';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TUser } from './user.interface';
 import { User } from './user.model';
-
 import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
+import { hostImageToCloudinary } from '../../utils/hostImageToCloudinary';
+import { uniqueUserImageNameGenerator } from '../../utils/uniqueImageNameGenerator';
 
 /* --------Logic For Create a User------ */
-const createUserIntoDB = async (payload: TUser) => {
+const createUserIntoDB = async (imageFileDetails: any, payload: TUser) => {
   const user = await User.isUserExistByEmail(payload?.email);
   if (user) {
     throw new AppError(400, 'Email is already used.');
   }
 
-  const session = await mongoose.startSession();
-
-  try {
-    session.startTransaction();
-
-    const newUser = await User.create([payload], { session });
-
-    if (!newUser) {
-      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create User');
-    }
-
-    await session.commitTransaction();
-    await session.endSession();
-
-    //---------- Extract only required fields
-    const userData = {
-      _id: newUser[0]?._id,
-      name: newUser[0]?.name,
-      email: newUser[0]?.email,
-    };
-
-    return userData;
-  } catch (err) {
-    await session.abortTransaction();
-    await session.endSession();
-    throw new Error(`${err}`);
+  // ----------send Image to the cloudinary----------
+  if (imageFileDetails) {
+    const imagePath = imageFileDetails?.path;
+    const { imageName } = uniqueUserImageNameGenerator(payload.name);
+    const { secure_url } = await hostImageToCloudinary(imageName, imagePath);
+    payload.profileImg = secure_url as string;
   }
+  const result = await User.create(payload);
+
+  if (!result) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create User');
+  }
+
+
+  return result;
 };
 
 export const UserServices = {

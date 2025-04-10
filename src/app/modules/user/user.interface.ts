@@ -9,6 +9,7 @@ export interface TUser {
   email: string;
   password: string;
   role: 'admin' | 'user';
+  profileImg?: string;
   isBlocked: boolean;
 }
 

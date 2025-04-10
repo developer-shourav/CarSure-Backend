@@ -3,12 +3,16 @@ import validateRequest from '../../middlewares/validateRequest';
 import { userValidation } from '../user/user.validation';
 import { AuthControllers } from './auth.controller';
 import { AuthValidation } from './auth.validation';
+import { upload } from '../../utils/hostImageToCloudinary';
+import { formDataToJsonConvertor } from '../../middlewares/formDataToJsonConvertor';
 
 const router = express.Router();
 
 // -----------Register An User
 router.post(
   '/register',
+  upload.single('profileImg'),
+  formDataToJsonConvertor,
   validateRequest(userValidation.userValidationSchema),
   AuthControllers.registerUser,
 );

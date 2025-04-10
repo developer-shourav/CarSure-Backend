@@ -3,6 +3,11 @@ import { TCar, CarModel } from './car.interface';
 
 const carSchema = new Schema<TCar, CarModel>(
   {
+    carName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     brand: {
       type: String,
       required: true,
@@ -38,6 +43,7 @@ const carSchema = new Schema<TCar, CarModel>(
       type: Number,
       required: true,
     },
+    productImg: { type: String, default: '' },
     inStock: {
       type: Boolean,
       required: true,
