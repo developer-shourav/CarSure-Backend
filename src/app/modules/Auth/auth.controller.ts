@@ -6,9 +6,10 @@ import sendResponse from '../../utils/sendResponse';
 import { AuthServices } from './auth.service';
 /* ----------------------Register An User----------------- */
 const registerUser = catchAsync(async (req, res) => {
+  const imageFileDetails = req.file;
   const userData = req.body;
   // will call service function to send this data
-  const result = await AuthServices.registerUserIntoDB(userData);
+  const result = await AuthServices.registerUserIntoDB(imageFileDetails, userData);
 
   sendResponse(res, 201, {
     message: 'User registered successfully',

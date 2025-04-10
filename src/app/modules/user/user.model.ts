@@ -24,6 +24,7 @@ const userSchema = new Schema<TUser, UserModel>(
       enum: ['admin', 'user'],
       default: 'user',
     },
+    profileImg: { type: String, default: '' },
     isBlocked: {
       type: Boolean,
       default: false,

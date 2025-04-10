@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
 import { TUser } from '../user/user.interface';
@@ -7,36 +7,25 @@ import { JwtPayload } from 'jsonwebtoken';
 import config from '../../config';
 import { createToken } from './auth.utils';
 import jwt from 'jsonwebtoken';
+import { uniqueUserImageNameGenerator } from '../../utils/uniqueImageNameGenerator';
+import { hostImageToCloudinary } from '../../utils/hostImageToCloudinary';
 
 /* --------Logic For Register an User ---------- */
-const registerUserIntoDB = async (payload: TUser) => {
-  const session = await mongoose.startSession();
+const registerUserIntoDB = async (imageFileDetails: any,  payload: TUser) => {
 
-  try {
-    session.startTransaction();
-
-    const newUser = await User.create([payload], { session });
-
-    if (!newUser) {
-      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create User');
-    }
-
-    await session.commitTransaction();
-    await session.endSession();
-
-    //---------- Extract only required fields
-    const userData = {
-      _id: newUser[0]?._id,
-      name: newUser[0]?.name,
-      email: newUser[0]?.email,
-    };
-
-    return userData;
-  } catch (err) {
-    await session.abortTransaction();
-    await session.endSession();
-    throw new Error(`${err}`);
+  const result = await User.create(payload);
+  if (imageFileDetails) {
+    const imagePath = imageFileDetails?.path;
+    const { imageName } = uniqueUserImageNameGenerator(payload.name);
+    const { secure_url } = await hostImageToCloudinary(imageName, imagePath);
+    payload.profileImg = secure_url as string;
   }
+
+  if (!result) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create User');
+  }
+
+  return result;
 };
 
 /* ---------- Logic for Login an User ----------*/
