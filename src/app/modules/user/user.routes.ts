@@ -24,11 +24,5 @@ router.get(
   UserControllers.getAllUsers,
 );
 
-// -----------Get All Users
-router.post(
-  '/',
-  auth(USER_ROLE.admin),
-  UserControllers.getAllUsers,
-);
 
 export const UserRoutes = router;
