@@ -17,12 +17,18 @@ router.post(
   validateRequest(userValidation.userValidationSchema),
   UserControllers.createUser,
 );
+// -----------Get All  Users
+router.get(
+  '/',
+  auth(USER_ROLE.admin),
+  UserControllers.getAllUsers,
+);
 
 // -----------Get All Users
 router.post(
   '/',
   auth(USER_ROLE.admin),
-  UserControllers.getAllUser,
+  UserControllers.getAllUsers,
 );
 
 export const UserRoutes = router;
