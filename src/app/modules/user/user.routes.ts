@@ -4,6 +4,8 @@ import { UserControllers } from './user.controller';
 import { userValidation } from './user.validation';
 import { upload } from '../../utils/hostImageToCloudinary';
 import { formDataToJsonConvertor } from '../../middlewares/formDataToJsonConvertor';
+import auth from '../../middlewares/auth';
+import { USER_ROLE } from './user.constant';
 
 const router = express.Router();
 
@@ -14,6 +16,13 @@ router.post(
   formDataToJsonConvertor,
   validateRequest(userValidation.userValidationSchema),
   UserControllers.createUser,
+);
+
+// -----------Get All Users
+router.post(
+  '/',
+  auth(USER_ROLE.admin),
+  UserControllers.getAllUser,
 );
 
 export const UserRoutes = router;

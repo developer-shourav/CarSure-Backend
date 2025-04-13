@@ -30,6 +30,14 @@ const createUserIntoDB = async (imageFileDetails: any, payload: TUser) => {
   return result;
 };
 
+const getAllUsersFromBD = async () => {
+ const result = User.find();
+if(!result){
+  throw new AppError(404, 'Users not found!');
+}
+ return result;
+}
 export const UserServices = {
   createUserIntoDB,
+  getAllUsersFromBD,
 };
