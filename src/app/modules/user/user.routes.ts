@@ -19,7 +19,7 @@ router.post(
 );
 // -----------Get All  Users
 router.get(
-  '/',
+  '/all',
   auth(USER_ROLE.admin),
   UserControllers.getAllUsers,
 );
