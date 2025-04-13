@@ -26,10 +26,19 @@ const createUserIntoDB = async (imageFileDetails: any, payload: TUser) => {
     throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create User');
   }
 
-
   return result;
 };
 
+/* ---------------------Get All Users from Database------------------- */
+const getAllUsersFromDB = async () => {
+
+ const result = await User.find();
+ return result;
+
+};
+
+
 export const UserServices = {
   createUserIntoDB,
+  getAllUsersFromDB,
 };
