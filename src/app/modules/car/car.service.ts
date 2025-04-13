@@ -24,7 +24,12 @@ const addNewCarIntoDB = async (imageFileDetails: any, carData: TCar) => {
   // ----------send Image to the cloudinary----------
   if (imageFileDetails) {
     const imagePath = imageFileDetails?.path;
-    const { imageName } = uniqueCarImageNameGenerator(carData.carName, carData.brand, carData.model, carData.year);
+    const { imageName } = uniqueCarImageNameGenerator(
+      carData.carName,
+      carData.brand,
+      carData.model,
+      carData.year,
+    );
     const { secure_url } = await hostImageToCloudinary(imageName, imagePath);
 
     carData.productImg = secure_url as string;
@@ -43,7 +48,7 @@ const getAllCarsFromDB = async () => {
 const getSingleCarFromDB = async (carId: string) => {
   const result = await Car.findOne({ _id: carId });
   if (!result) {
-    throw new AppError( httpStatus.NOT_FOUND ,'Car not found!');
+    throw new AppError(httpStatus.NOT_FOUND, 'Car not found!');
   }
   return result;
 };
@@ -59,7 +64,7 @@ const updateSingleCarFromDB = async (
     { new: true, runValidators: true }, // Return the updated document and apply validation
   );
   if (!updatedCar) {
-    throw new AppError(httpStatus.NOT_FOUND ,'Car not found!');
+    throw new AppError(httpStatus.NOT_FOUND, 'Car not found!');
   }
   return updatedCar;
 };

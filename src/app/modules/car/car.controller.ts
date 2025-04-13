@@ -10,7 +10,10 @@ const addNewCar = catchAsync(async (req, res) => {
   const addNewCarData = req.body;
 
   /* ----------Store data to Database -------- */
-  const result = await carServices.addNewCarIntoDB(imageFileDetails, addNewCarData);
+  const result = await carServices.addNewCarIntoDB(
+    imageFileDetails,
+    addNewCarData,
+  );
 
   sendResponse(res, 201, {
     message: 'Car created successfully',

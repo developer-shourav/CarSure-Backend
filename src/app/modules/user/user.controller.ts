@@ -7,7 +7,10 @@ const createUser = catchAsync(async (req, res) => {
   const userData = req.body;
 
   // will call service function to send this data
-  const result = await UserServices.createUserIntoDB(imageFileDetails, userData);
+  const result = await UserServices.createUserIntoDB(
+    imageFileDetails,
+    userData,
+  );
 
   sendResponse(res, 201, {
     message: 'User is created successfully',
@@ -18,7 +21,6 @@ const createUser = catchAsync(async (req, res) => {
 /* ----------------Get All Users------------------- */
 
 const getAllUsers = catchAsync(async (req, res) => {
-
   const result = await UserServices.getAllUsersFromBD();
   sendResponse(res, 200, {
     message: 'Users retrieved successfully',

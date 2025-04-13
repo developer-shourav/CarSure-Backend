@@ -17,12 +17,7 @@ router.post(
   validateRequest(userValidation.userValidationSchema),
   UserControllers.createUser,
 );
-// -----------Get All  Users
-router.get(
-  '/all',
-  auth(USER_ROLE.admin),
-  UserControllers.getAllUsers,
-);
-
+// -----------Get All Users
+router.get('/all', auth(USER_ROLE.admin), UserControllers.getAllUsers);
 
 export const UserRoutes = router;

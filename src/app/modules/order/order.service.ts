@@ -26,7 +26,10 @@ const createNewOrder = async (orderData: TOrder) => {
 
   //----------- Check if User Given Price is correct or not
   if (totalPrice !== orderData.totalPrice) {
-    throw new AppError( httpStatus.FORBIDDEN,'Your added price is not equal to car actual price!');
+    throw new AppError(
+      httpStatus.FORBIDDEN,
+      'Your added price is not equal to car actual price!',
+    );
   }
 
   //----------- Update the car's inventory
@@ -65,7 +68,7 @@ const getAllOrdersFromDB = async () => {
 const getAnOrderFromDB = async (orderId: string) => {
   const result = await Order.findOne({ _id: orderId });
   if (!result) {
-    throw new AppError( httpStatus.NOT_FOUND,'Order not found!');
+    throw new AppError(httpStatus.NOT_FOUND, 'Order not found!');
   }
   return result;
 };
@@ -81,7 +84,7 @@ const updateSingleOrderFromDB = async (
     { new: true, runValidators: true }, // Return the updated document and apply validation
   );
   if (!updatedCar) {
-    throw new AppError( httpStatus.NOT_FOUND,'Order not found!');
+    throw new AppError(httpStatus.NOT_FOUND, 'Order not found!');
   }
   return updatedCar;
 };
@@ -89,7 +92,7 @@ const updateSingleOrderFromDB = async (
 const deleteAnOrderFromDB = async (orderId: string) => {
   const result = await Order.findByIdAndDelete({ _id: orderId });
   if (!result) {
-    throw new AppError( httpStatus.NOT_FOUND,'Order not found!');
+    throw new AppError(httpStatus.NOT_FOUND, 'Order not found!');
   }
 
   return result;

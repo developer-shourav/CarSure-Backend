@@ -33,6 +33,6 @@ router.patch(
 );
 
 /* -------Delete A Car */
-router.delete('/:carId',   auth(USER_ROLE.admin), CarControllers.deleteSingleCar);
+router.delete('/:carId', auth(USER_ROLE.admin), CarControllers.deleteSingleCar);
 
 export const CarRoutes = router;
