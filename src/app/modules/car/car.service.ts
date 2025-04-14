@@ -5,6 +5,7 @@ import { hostImageToCloudinary } from '../../utils/hostImageToCloudinary';
 import { TCar } from './car.interface';
 import { Car } from './car.model';
 import { uniqueCarImageNameGenerator } from '../../utils/uniqueImageNameGenerator';
+import QueryBuilder from '../../builder/QueryBuilder';
 
 /* --------Logic For add a car to DataBase------ */
 const addNewCarIntoDB = async (imageFileDetails: any, carData: TCar) => {
@@ -39,10 +40,29 @@ const addNewCarIntoDB = async (imageFileDetails: any, carData: TCar) => {
   return result;
 };
 /* --------------Logic For get all cars form Database --------- */
-const getAllCarsFromDB = async () => {
-  const result = await Car.find();
-  return result;
+const getAllCarsFromDB = async (query: Record<string, unknown>) => {
+  const carSearchFields = [
+    "carName",
+    "brand",
+    "model",
+    "description",
+  ];
+
+  // Search, Filter, Sort, Pagination and Field Filtering Using Query Chaining Method
+  const carQuery = new QueryBuilder(
+    Car.find(),
+    query,
+  )
+    .search(carSearchFields)
+    .filter()
+    .sortBy()
+    .pagination()
+    .fieldFiltering();
+  const result = await carQuery.queryModel;
+  const meta = await carQuery.countTotal();
+  return { meta, result };
 };
+
 
 /* --------------Logic For get single car form Database --------- */
 const getSingleCarFromDB = async (carId: string) => {

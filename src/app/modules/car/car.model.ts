@@ -64,7 +64,7 @@ carSchema.statics.isCarExists = async function (
   year: number,
   category: string,
 ) {
-  const existingCar = await Car.findOne({ brand, model, year, category });
+  const existingCar = await Car.findOne({ carName, brand, model, year, category });
   return existingCar;
 };
 
