@@ -58,9 +58,9 @@ const getAllCarsFromDB = async (query: Record<string, unknown>) => {
     .sortBy()
     .pagination()
     .fieldFiltering();
-  const result = await carQuery.queryModel;
+  const data = await carQuery.queryModel;
   const meta = await carQuery.countTotal();
-  return { meta, result };
+  return { meta, data };
 };
 
 
