@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
 
-export type TCarCategory = 'Sedan' | 'SUV' | 'Truck' | 'Coupe' | 'Convertible';
+export type TCarCategory = 'sedan' | 'suv' | 'sports' | 'coupe' | 'convertible';
 
 export type TCar = {
   carName: string;
