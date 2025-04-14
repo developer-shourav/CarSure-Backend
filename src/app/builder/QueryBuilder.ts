@@ -37,15 +37,11 @@ class QueryBuilder<T> {
       'limit',
       'page',
       'fields',
-      'filter',
     ];
-    excludedFields.forEach((field) => delete queryObject[field]);
-
-    if (this.query?.filter) {
-      queryObject['author'] = this.query.filter;
-    }
-
+   excludedFields.forEach((field) => delete queryObject[field]);
+    // Filter Logic
     this.queryModel = this.queryModel.find(queryObject as FilterQuery<T>);
+
     return this;
   }
 

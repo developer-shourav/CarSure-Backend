@@ -23,7 +23,8 @@ const addNewCar = catchAsync(async (req, res) => {
 
 /* -----------------Get All Cars------------------------- */
 const getAllCars = catchAsync(async (req, res) => {
-  const result = await carServices.getAllCarsFromDB();
+  const query = req.query;
+  const result = await carServices.getAllCarsFromDB(query);
 
   sendResponse(res, httpStatus.OK, {
     message: 'Cars retrieved successfully',
