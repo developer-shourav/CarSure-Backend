@@ -28,7 +28,8 @@ const getAllCars = catchAsync(async (req, res) => {
 
   sendResponse(res, httpStatus.OK, {
     message: 'Cars retrieved successfully',
-    data: result,
+    meta: result.meta,
+    data: result.data,
   });
 });
 
