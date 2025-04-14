@@ -22,6 +22,7 @@ const sendResponse = <T>(
     success: true,
     message: responseData.message,
     statusCode,
+    meta: responseData.meta,
     data: responseData.data,
   });
 };
