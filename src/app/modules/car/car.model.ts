@@ -31,7 +31,7 @@ const carSchema = new Schema<TCar, CarModel>(
     category: {
       type: String,
       enum: {
-        values: ['Sedan', 'SUV', 'Truck', 'Coupe', 'Convertible'],
+        values: ['sedan', 'suv', 'sports', 'coupe', 'convertible'],
         message: '{VALUE} is not a valid category.',
       },
       required: [true, 'car category is required.'],
@@ -58,6 +58,7 @@ const carSchema = new Schema<TCar, CarModel>(
 
 // Find it the card existing or not ------
 carSchema.statics.isCarExists = async function (
+  carName: string,
   brand: string,
   model: string,
   year: number,

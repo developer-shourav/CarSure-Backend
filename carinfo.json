@@ -1,0 +1,222 @@
+[
+    {
+      "carName": "M3 Competition",
+      "brand": "BMW",
+      "model": "M3",
+      "year": 2024,
+      "price": 82300,
+      "category": "sedan",
+      "description": "The 2024 BMW M3 Competition stands as a testament to high-performance engineering within the sedan segment. It seamlessly blends track-ready capabilities with the everyday practicality and luxurious appointments expected of a BMW. Under the hood lies a potent twin-turbocharged inline-six engine, meticulously tuned by BMW's M division to deliver exhilarating power and torque. This allows for blistering acceleration and a truly engaging driving experience. The M3 Competition features an aggressively styled exterior, characterized by its distinctive kidney grille, aerodynamic enhancements, and quad exhaust outlets, hinting at the performance within. Inside, the cabin is a harmonious blend of premium materials, sporty design elements, and advanced technology. Features like M sport seats, a driver-focused cockpit, and the latest iDrive infotainment system contribute to both comfort and performance. The precisely tuned chassis, adaptive M suspension, and powerful M compound brakes ensure exceptional handling and control, whether navigating city streets or pushing the limits on a race track. It's a sedan that caters to driving enthusiasts who demand both thrilling performance and refined sophistication.",
+      "quantity": 5,
+      "inStock": true
+    },
+    {
+      "carName": "X5 M",
+      "brand": "BMW",
+      "model": "X5",
+      "year": 2023,
+      "price": 122300,
+      "category": "suv",
+      "description": "The 2023 BMW X5 M redefines the concept of a high-performance SUV, delivering an exceptional combination of power, luxury, and versatility. This formidable vehicle is equipped with a high-output twin-turbocharged V8 engine that produces a staggering amount of horsepower and torque, resulting in breathtaking acceleration and dynamic driving characteristics that defy its size. The exterior design is both athletic and sophisticated, featuring M-specific styling cues such as aggressive bumpers, side skirts, and large alloy wheels. Inside, the X5 M boasts a lavish and technologically advanced cabin, adorned with premium leather, carbon fiber accents, and the latest generation of BMW's iDrive system, complete with a large infotainment display and a digital instrument cluster. Passengers can enjoy ample space and comfort, while the driver benefits from supportive M sport seats and a performance-oriented steering wheel. The X5 M's advanced all-wheel-drive system, adaptive M suspension, and electronically controlled dampers ensure exceptional handling and stability in various driving conditions. It's an SUV that offers the thrill of a sports car with the practicality and space of a utility vehicle.",
+      "quantity": 3,
+      "inStock": true
+    },
+    {
+      "carName": "Huracán Tecnica",
+      "brand": "Lamborghini",
+      "model": "Huracán",
+      "year": 2023,
+      "price": 291000,
+      "category": "sports",
+      "description": "The 2023 Lamborghini Huracán Tecnica represents the pinnacle of track-focused performance within the Huracán lineup. This stunning supercar is engineered for pure driving exhilaration, drawing inspiration and technology directly from Lamborghini's racing heritage. At its heart lies a naturally aspirated V10 engine, renowned for its visceral sound and immediate throttle response, delivering an unforgettable auditory and tactile experience. The Tecnica's aerodynamic design is highly optimized for downforce and reduced drag, featuring a redesigned front bumper, rear wing, and underbody elements that enhance stability at high speeds. The lightweight construction further contributes to its agility and responsiveness. Inside the cockpit, the focus is firmly on the driver, with supportive sport seats, Alcantara upholstery, and a digital instrument panel that provides crucial performance data. Advanced driving modes and a sophisticated traction control system allow drivers to explore the car's limits with confidence. The Huracán Tecnica is more than just a sports car; it's a precision instrument designed to deliver an unparalleled connection between driver and machine on both the road and the racetrack.",
+      "quantity": 1,
+      "inStock": true
+    },
+    {
+      "carName": "Urus Performante",
+      "brand": "Lamborghini",
+      "model": "Urus",
+      "year": 2024,
+      "price": 269800,
+      "category": "suv",
+      "description": "The 2024 Lamborghini Urus Performante elevates the concept of a Super SUV to new heights, blending Lamborghini's iconic performance DNA with the practicality and versatility of an SUV. This aggressively styled machine boasts an even more potent version of the Urus's twin-turbocharged V8 engine, delivering increased power and torque for breathtaking acceleration and a truly commanding presence. The Performante distinguishes itself with lightweight materials, including extensive use of carbon fiber, which not only reduces weight but also enhances its dynamic capabilities. Its aerodynamic enhancements, such as a redesigned front splitter and rear spoiler, contribute to improved downforce and stability at high speeds. Inside, the cabin features exclusive Performante trim, including lightweight sport seats and Alcantara upholstery, emphasizing its performance-oriented nature. Despite its focus on performance, the Urus Performante retains the luxurious appointments and advanced technology expected of a Lamborghini. With its sophisticated all-wheel-drive system, adaptive air suspension, and various driving modes, it offers exceptional handling and control on both paved roads and challenging terrains. It's a unique vehicle that delivers the thrill of a supercar with the everyday usability of a high-end SUV.",
+      "quantity": 2,
+      "inStock": true
+    },
+    {
+      "carName": "Range Rover Autobiography",
+      "brand": "Land Rover",
+      "model": "Range Rover",
+      "year": 2024,
+      "price": 168000,
+      "category": "suv",
+      "description": "The 2024 Land Rover Range Rover Autobiography epitomizes ultimate luxury and refinement within the SUV segment. This flagship model offers an unparalleled level of comfort, sophistication, and capability, making it a true icon of automotive excellence. The exterior design is both elegant and commanding, characterized by its distinctive silhouette, premium finishes, and signature lighting elements. Inside, the cabin is a sanctuary of opulence, featuring the finest leather upholstery, exquisite wood veneers, and meticulously crafted details throughout. Passengers are treated to an abundance of space, plush seating with massage functions, and a wealth of advanced technology designed for both convenience and entertainment. The Range Rover Autobiography is equipped with a powerful engine, delivering smooth and effortless performance. Its advanced air suspension system provides a supremely comfortable ride, while its legendary all-wheel-drive system ensures exceptional capability on any terrain. Whether navigating city streets or venturing off the beaten path, the Range Rover Autobiography offers a serene and confident driving experience, setting a benchmark for luxury SUVs.",
+      "quantity": 4,
+      "inStock": true
+    },
+    {
+      "carName": "Defender 110",
+      "brand": "Land Rover",
+      "model": "Defender",
+      "year": 2023,
+      "price": 60600,
+      "category": "suv",
+      "description": "The 2023 Land Rover Defender 110 is a modern interpretation of a legendary off-road icon, blending rugged capability with contemporary design and advanced technology. This versatile SUV retains the unmistakable silhouette of its predecessor while incorporating sleek lines and modern details. The Defender 110 offers spacious seating for up to seven passengers and a durable, utilitarian interior designed to withstand the rigors of both daily life and adventurous excursions. It is equipped with powerful and efficient engine options, providing ample torque for both on-road performance and off-road prowess. Land Rover's advanced Terrain Response system allows drivers to optimize the vehicle's settings for various driving conditions, ensuring exceptional traction and control on any surface. The Defender 110 boasts a robust chassis and sophisticated suspension system, delivering a comfortable ride on paved roads while maintaining its legendary off-road capabilities. With its blend of heritage, modern features, and go-anywhere attitude, the Defender 110 appeals to those who seek both adventure and everyday practicality in a stylish and capable SUV.",
+      "quantity": 6,
+      "inStock": true
+    },
+    {
+      "carName": "C-Class Sedan",
+      "brand": "Mercedes-Benz",
+      "model": "C 300",
+      "year": 2024,
+      "price": 48000,
+      "category": "sedan",
+      "description": "The 2024 Mercedes-Benz C-Class Sedan, specifically the C 300 model, represents a harmonious blend of sophistication, performance, and cutting-edge technology within the luxury sedan segment. Its elegant exterior design is characterized by flowing lines and a refined aesthetic, making a statement of understated luxury. The interior of the C-Class Sedan is meticulously crafted with premium materials, comfortable seating, and an intuitive layout. The latest generation of Mercedes-Benz's MBUX infotainment system takes center stage, offering a seamless and personalized digital experience with features like voice control and augmented reality navigation. The C 300 is powered by a refined and efficient engine that delivers a smooth and responsive driving experience, striking a balance between performance and fuel economy. The well-tuned suspension provides a comfortable and composed ride, while offering engaging handling characteristics. With its comprehensive suite of safety features and driver-assistance systems, the C-Class Sedan prioritizes occupant safety and provides a confident driving experience. It's a sedan that caters to those who appreciate a blend of luxury, technology, and enjoyable driving dynamics in a stylish package.",
+      "quantity": 7,
+      "inStock": true
+    },
+    {
+      "carName": "GLE 450 4MATIC",
+      "brand": "Mercedes-Benz",
+      "model": "GLE",
+      "year": 2023,
+      "price": 62650,
+      "category": "suv",
+      "description": "The 2023 Mercedes-Benz GLE 450 4MATIC is a luxurious and spacious SUV that seamlessly combines comfort, technology, and performance. Its striking exterior design exudes a sense of modern elegance and robust capability. The interior of the GLE 450 is a haven of premium materials, including supple leather and refined trim options. Passengers enjoy ample legroom and headroom, along with comfortable and supportive seating. The MBUX infotainment system, with its dual-screen setup and intuitive controls, provides a wealth of features for navigation, entertainment, and vehicle settings. The GLE 450 is powered by a potent engine that delivers smooth and responsive performance, further enhanced by the 4MATIC all-wheel-drive system, which provides confident traction in various driving conditions. The air suspension system offers a remarkably comfortable and composed ride, adapting to different road surfaces and driving styles. With its generous cargo space and a suite of advanced safety and driver-assistance technologies, the GLE 450 is a versatile and family-friendly SUV that doesn't compromise on luxury or performance. It's an ideal choice for those seeking a refined and capable SUV experience.",
+      "quantity": 5,
+      "inStock": true
+    },
+    {
+      "carName": "Civic Si",
+      "brand": "Honda",
+      "model": "Civic",
+      "year": 2023,
+      "price": 28300,
+      "category": "sedan",
+      "description": "The 2023 Honda Civic Si stands out as a sporty and engaging compact sedan that offers a thrilling driving experience without sacrificing everyday practicality. It is powered by a turbocharged engine that delivers a noticeable boost in performance compared to the standard Civic, providing spirited acceleration and a fun-to-drive character. The Civic Si features a more aggressive exterior styling with unique bumpers, a rear spoiler, and larger alloy wheels, hinting at its performance intentions. Inside, the cabin features sporty seats with red accents, a leather-wrapped steering wheel, and aluminum pedals, creating a driver-focused environment. The precise manual transmission is a key element of the Civic Si's appeal, offering a direct and engaging connection to the powertrain. The sport-tuned suspension provides sharper handling and reduced body roll, making it enjoyable to drive on winding roads. Despite its sporty nature, the Civic Si remains a practical sedan with comfortable seating for passengers and a decent amount of cargo space. It's a compelling option for driving enthusiasts who want a reliable and affordable sedan with a significant dose of performance and engaging dynamics.",
+      "quantity": 10,
+      "inStock": true
+    },
+    {
+      "carName": "CR-V Hybrid",
+      "brand": "Honda",
+      "model": "CR-V",
+      "year": 2024,
+      "price": 34000,
+      "category": "suv",
+      "description": "The 2024 Honda CR-V Hybrid represents a smart and efficient choice in the popular compact SUV segment, combining Honda's renowned reliability with the added fuel economy of a hybrid powertrain. This practical SUV offers a comfortable and spacious interior, with ample room for both passengers and cargo, making it ideal for families and everyday use. The hybrid system seamlessly integrates a gasoline engine with electric motors, providing smooth acceleration and impressive fuel efficiency. The CR-V Hybrid delivers a comfortable and composed ride, thanks to its well-tuned suspension. It also comes equipped with a range of standard safety features and available driver-assistance technologies, enhancing peace of mind on the road. The exterior design is modern and refined, with a focus on practicality and functionality. Inside, the user-friendly infotainment system and comfortable seating contribute to a pleasant driving experience. The CR-V Hybrid strikes a compelling balance between fuel efficiency, practicality, comfort, and Honda's legendary reliability, making it a top contender in the competitive hybrid SUV market.",
+      "quantity": 8,
+      "inStock": true
+    },
+    {
+      "carName": "Mustang GT",
+      "brand": "Ford",
+      "model": "Mustang",
+      "year": 2024,
+      "price": 43000,
+      "category": "sports",
+      "description": "The 2024 Ford Mustang GT continues the iconic legacy of American muscle cars, delivering thrilling performance and a distinctive style that has captivated enthusiasts for generations. At its heart lies a powerful V8 engine that produces a significant amount of horsepower and a signature exhaust note that is instantly recognizable. The Mustang GT offers exhilarating acceleration and a dynamic driving experience that is both engaging and rewarding. Its exterior design is a modern interpretation of classic Mustang styling cues, featuring a long hood, a short rear deck, and distinctive lighting signatures. Inside, the cockpit blends retro-inspired elements with modern technology, including a digital instrument panel and a user-friendly infotainment system. The Mustang GT offers various driving modes that allow drivers to tailor the car's performance and handling characteristics to their preferences. With its potent engine, rear-wheel drive, and athletic handling, the Mustang GT provides a visceral and enjoyable driving experience that embodies the spirit of American muscle. It remains a compelling choice for those seeking a powerful and stylish sports car with a rich heritage.",
+      "quantity": 3,
+      "inStock": true
+    },
+    {
+      "carName": "F-150 Raptor",
+      "brand": "Ford",
+      "model": "F-150",
+      "year": 2023,
+      "price": 76800,
+      "category": "suv",
+      "description": "The 2023 Ford F-150 Raptor stands as a high-performance off-road pickup truck engineered for extreme capability and rugged durability. This formidable machine is built upon the foundation of the best-selling F-150 but is significantly enhanced with specialized off-road components and a powerful engine. The Raptor features a high-output EcoBoost V6 engine that delivers impressive horsepower and torque, providing the muscle needed for challenging terrains and high-speed desert runs. Its long-travel suspension, featuring FOX Racing Shocks, allows it to absorb large impacts and navigate rough terrain with remarkable composure. The Raptor's aggressive exterior styling includes a unique grille with bold 'FORD' lettering, flared fenders, and durable skid plates, signaling its off-road prowess. Inside, the cabin offers supportive seating, durable materials, and a range of technology features designed for both comfort and functionality. With its advanced four-wheel-drive system, locking differentials, and various off-road driving modes, the F-150 Raptor is a true off-road beast that also offers surprising on-road comfort and practicality. It's the ultimate pickup truck for those who demand both extreme capability and everyday usability.",
+      "quantity": 2,
+      "inStock": true
+    },
+    {
+      "carName": "i4 M50",
+      "brand": "BMW",
+      "model": "i4",
+      "year": 2023,
+      "price": 69700,
+      "category": "sedan",
+      "description": "The 2023 BMW i4 M50 represents a significant step into the realm of electric performance sedans, seamlessly blending BMW's renowned driving dynamics with the instant torque and efficiency of an electric powertrain. This all-electric Gran Coupe delivers exhilarating acceleration and a refined driving experience. The i4 M50 features a dual-motor setup, providing all-wheel drive and a substantial amount of power, making it a true performance machine. Its sleek and aerodynamic exterior design is both stylish and functional, contributing to its efficiency and presence. Inside, the cabin is a showcase of modern luxury and technology, featuring premium materials, comfortable sport seats, and the latest generation of BMW's iDrive infotainment system with a large curved display. The i4 M50 offers a comfortable and composed ride, while its sport-tuned suspension and precise steering provide engaging handling characteristics. With a significant electric driving range and fast-charging capabilities, the i4 M50 offers a compelling combination of performance, luxury, and sustainability, catering to driving enthusiasts who are embracing electric mobility without compromising on the thrill of a BMW.",
+      "quantity": 4,
+      "inStock": true
+    },
+    {
+      "carName": "AMG C 63 S E Performance",
+      "brand": "Mercedes-Benz",
+      "model": "C-Class",
+      "year": 2024,
+      "price": 84000,
+      "category": "sedan",
+    "description": "The 2024 Mercedes-AMG C 63 S E Performance marks a groundbreaking shift in high-performance sedans, integrating a potent hybrid powertrain with AMG's legendary driving dynamics. This innovative vehicle combines a turbocharged four-cylinder engine with an electric motor, resulting in a staggering amount of power and instant torque delivery for breathtaking acceleration and performance. The exterior design retains the aggressive AMG styling cues, including unique bumpers, wider fenders, and distinctive exhaust outlets, while subtle badging hints at its electrified nature. Inside, the cabin is a blend of sporty sophistication and advanced technology, featuring AMG-specific sport seats, a performance steering wheel, and the MBUX infotainment system with AMG-specific displays and functions. The sophisticated all-wheel-drive system and adaptive AMG suspension ensure exceptional handling and control in various driving conditions. Despite its hybrid powertrain, the C 63 S E Performance delivers the visceral driving experience expected of an AMG, with impressive power delivery and engaging dynamics. It represents a new era of high-performance motoring, combining thrilling performance with enhanced efficiency and technological innovation, appealing to drivers who demand the ultimate in both power and sustainability.",
+    "quantity": 2,
+    "inStock": true
+  },
+  {
+    "carName": "Elantra N",
+    "brand": "Hyundai",
+    "model": "Elantra",
+    "year": 2023,
+    "price": 33700,
+    "category": "sedan",
+    "description": "The 2023 Hyundai Elantra N injects a significant dose of performance and excitement into the compact sedan segment. Developed by Hyundai's N performance division, this sporty sedan boasts a potent turbocharged engine that delivers strong acceleration and a playful driving character. The Elantra N features a distinctive and aggressive exterior design, with unique front and rear fascias, a rear spoiler, and sporty alloy wheels that set it apart from the standard Elantra. Inside, the cabin features sport seats with N branding, a sporty steering wheel, and aluminum pedals, creating a driver-focused environment. The Elantra N is equipped with a responsive manual or a quick-shifting dual-clutch transmission, allowing for engaging gear changes. The sport-tuned suspension, along with an electronically controlled limited-slip differential, provides sharp handling and enhanced grip, making it enjoyable to drive on twisty roads. Despite its performance focus, the Elantra N remains a practical sedan with comfortable seating and a decent amount of cargo space. It offers a compelling combination of performance, features, and affordability, appealing to driving enthusiasts looking for a fun and engaging daily driver.",
+    "quantity": 6,
+    "inStock": true
+  },
+  {
+    "carName": "Kona N",
+    "brand": "Hyundai",
+    "model": "Kona",
+    "year": 2024,
+    "price": 35000,
+    "category": "suv",
+    "description": "The 2024 Hyundai Kona N is a unique and exciting subcompact SUV that brings a surprising level of performance and agility to its segment. Also developed by Hyundai's N performance division, the Kona N is powered by a turbocharged engine that delivers spirited acceleration and a fun-to-drive character. Its exterior design is sporty and distinctive, with unique bumpers, side skirts, a rear spoiler, and dual exhaust outlets. Inside, the cabin features sport seats with N branding, a performance steering wheel, and sporty accents, creating a more engaging driving environment. The Kona N is equipped with a responsive dual-clutch transmission that offers quick and precise gear changes. The sport-tuned suspension and electronic limited-slip differential contribute to its agile handling and impressive grip. Despite its performance focus, the Kona N remains a practical subcompact SUV with a decent amount of cargo space and a user-friendly infotainment system. It's a compelling option for those looking for a small SUV with a significant fun-to-drive factor and a distinctive sporty flair, offering a unique blend of practicality and performance in its class.",
+    "quantity": 5,
+    "inStock": true
+  },
+  {
+    "carName": "Continental GT",
+    "brand": "Bentley",
+    "model": "Continental",
+    "year": 2023,
+    "price": 235000,
+    "category": "coupe",
+    "description": "The 2023 Bentley Continental GT stands as a paragon of luxurious grand touring, offering an exquisite blend of handcrafted opulence, powerful performance, and timeless design. This stunning coupe is meticulously crafted with the finest materials, including premium leather, rich wood veneers, and polished metal accents, creating an interior that exudes sophistication and comfort. Passengers are enveloped in a serene and refined atmosphere, with comfortable seating and a wealth of bespoke customization options. Under the hood lies a potent engine, offering effortless power and smooth acceleration for a truly grand touring experience. The Continental GT provides a comfortable and composed ride, thanks to its sophisticated air suspension system, while also offering engaging handling characteristics. The advanced infotainment system seamlessly integrates modern technology with classic Bentley styling. With its iconic design, unparalleled craftsmanship, and impressive performance, the Continental GT is a statement of automotive excellence, appealing to those who seek the ultimate in luxury and effortless power in a stylish coupe.",
+    "quantity": 1,
+    "inStock": true
+  },
+  {
+    "carName": "Z4 M40i",
+    "brand": "BMW",
+    "model": "Z4",
+    "year": 2024,
+    "price": 66300,
+    "category": "convertible",
+    "description": "The 2024 BMW Z4 M40i is a stylish and sporty roadster that delivers an exhilarating open-top driving experience. This two-seater convertible combines sleek design with a potent inline-six engine, providing impressive performance and engaging handling. The Z4 M40i features a sophisticated exterior design with a long hood, short rear deck, and a retractable soft top that can be lowered or raised quickly and easily. Inside, the cockpit is driver-focused, with comfortable sport seats, a leather-wrapped steering wheel, and BMW's intuitive iDrive infotainment system. The powerful engine delivers smooth and responsive acceleration, making it a joy to drive on winding roads. The sport-tuned suspension and precise steering provide agile handling and a direct connection to the road. Whether cruising along the coast with the top down or tackling twisty mountain passes, the Z4 M40i offers a thrilling and refined driving experience that embodies the classic roadster spirit with modern BMW engineering and technology.",
+    "quantity": 2,
+    "inStock": true
+  },
+  {
+    "carName": "AMG SL 63",
+    "brand": "Mercedes-Benz",
+    "model": "SL",
+    "year": 2023,
+    "price": 183000,
+    "category": "convertible",
+    "description": "The 2023 Mercedes-AMG SL 63 is a luxurious and high-performance convertible that embodies a rich heritage of open-top motoring combined with the formidable power and dynamics of AMG engineering. This stunning roadster features a sleek and elegant design with a retractable soft top, offering both coupe-like refinement and open-air exhilaration. The interior is a masterpiece of luxury, featuring premium leather upholstery, exquisite trim options, and the latest generation of Mercedes-Benz's MBUX infotainment system with AMG-specific displays and functions. The AMG SL 63 is powered by a potent engine that delivers breathtaking acceleration and a thrilling driving experience. The sophisticated AMG Ride Control suspension and active aerodynamics ensure exceptional handling and stability in various driving conditions. With its combination of luxurious comfort, cutting-edge technology, and exhilarating performance, the AMG SL 63 is a true icon, appealing to those who desire a high-performance convertible with a legacy of excellence and a truly engaging driving character.",
+    "quantity": 1,
+    "inStock": true
+  },
+  {
+    "carName": "Bronco Raptor",
+    "brand": "Ford",
+    "model": "Bronco",
+    "year": 2024,
+    "price": 89995,
+    "category": "suv",
+    "description": "The 2024 Ford Bronco Raptor is an ultra-capable and high-performance off-road SUV engineered for extreme adventures and conquering challenging terrains. Building upon the rugged foundation of the Bronco, the Raptor variant is significantly enhanced with specialized off-road components, a powerful engine, and aggressive styling. Its wide stance, massive tires, and unique bodywork, including flared fenders and heavy-duty skid plates, clearly signal its off-road prowess. The Bronco Raptor features a high-output engine that delivers impressive power and torque, providing the muscle needed for crawling over rocks and navigating rough trails. Its long-travel suspension, featuring FOX Live Valve shocks, allows it to absorb significant impacts and maintain composure on uneven surfaces. The advanced four-wheel-drive system, locking differentials, and various off-road driving modes ensure exceptional traction and control in challenging conditions. Inside, the cabin features durable materials, supportive seating, and a range of technology designed for both functionality and comfort. The Bronco Raptor is a true off-road beast that offers uncompromising capability and a thrilling driving experience for those who seek the ultimate adventure SUV.",
+    "quantity": 2,
+    "inStock": true
+  }
+]
