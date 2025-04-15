@@ -37,13 +37,50 @@ class QueryBuilder<T> {
       'limit',
       'page',
       'fields',
+      'minPrice',
+      'maxPrice',
+      'inStock',
     ];
-   excludedFields.forEach((field) => delete queryObject[field]);
-    // Filter Logic
-    this.queryModel = this.queryModel.find(queryObject as FilterQuery<T>);
+    excludedFields.forEach((field) => delete queryObject[field]);
+
+    const andConditions: FilterQuery<T>[] = [];
+
+    // Add existing filters
+    if (Object.keys(queryObject).length) {
+      andConditions.push(queryObject as FilterQuery<T>);
+    }
+
+    // Price range filtering
+    const minPrice = Number(this.query?.minPrice);
+    const maxPrice = Number(this.query?.maxPrice);
+
+    if (!isNaN(minPrice) || !isNaN(maxPrice)) {
+      const priceCondition: Record<string, number> = {};
+
+      if (!isNaN(minPrice)) priceCondition["$gte"] = minPrice;
+      if (!isNaN(maxPrice)) priceCondition["$lte"] = maxPrice;
+
+      andConditions.push({ price: priceCondition } as FilterQuery<T>);
+    }
+
+    // Availability filtering
+    const inStock = this.query?.inStock;
+    if (inStock !== undefined) {
+      const inStockValue =
+        inStock === 'true' ? true : inStock === 'false' ? false : null;
+      if (inStockValue !== null) {
+        andConditions.push({ inStock: inStockValue } as FilterQuery<T>);
+      }
+    }
+
+    // Final query
+    if (andConditions.length > 0) {
+      this.queryModel = this.queryModel.find({ $and: andConditions });
+    }
 
     return this;
   }
+
 
   // ------Method For Sorting ------
   sortBy() {
