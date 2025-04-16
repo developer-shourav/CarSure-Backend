@@ -17,7 +17,7 @@ const handleDuplicateError = (err: any): TGenericErrorResponse => {
   const statusCode = 400;
   return {
     statusCode,
-    message: 'Duplicate Error',
+    message: errorSources[0].message,
     errorSources,
   };
 };
