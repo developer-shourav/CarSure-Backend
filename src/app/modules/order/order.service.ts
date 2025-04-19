@@ -3,9 +3,11 @@ import AppError from '../../errors/AppError';
 import { Car } from '../car/car.model';
 import { TOrder } from './order.interface';
 import { Order } from './order.model';
+import { orderUtils } from './order.utils';
 
 /* ----------- Logic for Create a new order and manage inventory ----------- */
 const createNewOrder = async (orderData: TOrder) => {
+  const customerDetails = orderData?.customerInfo;
   //----------- Find the car by its ID
   const car = await Car.findById(orderData.carId);
   if (!car) {
@@ -40,8 +42,33 @@ const createNewOrder = async (orderData: TOrder) => {
   await car.save();
 
   //----------- Create a new order
-  const newOrder = await Order.create(orderData);
-  return newOrder;
+  let order = await Order.create(orderData);
+
+ // payment integration
+ const shurjopayPayload = {
+  amount: totalPrice,
+  order_id: order._id,
+  currency: "BDT",
+  customer_name: customerDetails.name,
+  customer_address: customerDetails.address,
+  customer_email: customerDetails.email,
+  customer_phone: customerDetails.phone,
+  customer_city: customerDetails.city,
+  client_ip: customerDetails.userIP,
+};
+
+const payment = await orderUtils.makePaymentAsync(shurjopayPayload);
+
+if (payment?.transactionStatus) {
+  order = await order.updateOne({
+    transaction: {
+      id: payment.sp_order_id,
+      transactionStatus: payment.transactionStatus,
+    },
+  });
+}
+
+return payment.checkout_url;
 };
 
 /* ---------- Logic for Calculate Revenue from Orders  ---------- */
@@ -88,6 +115,39 @@ const updateSingleOrderFromDB = async (
   }
   return updatedCar;
 };
+
+/* ---------------Verify Payment ---------------- */
+const verifyPayment = async (order_id: string) => {
+  const verifiedPayment = await orderUtils.verifyPaymentAsync(order_id);
+
+  if (verifiedPayment.length) {
+    await Order.findOneAndUpdate(
+      {
+        "transaction.id": order_id,
+      },
+      {
+        "transaction.bank_status": verifiedPayment[0].bank_status,
+        "transaction.sp_code": verifiedPayment[0].sp_code,
+        "transaction.sp_message": verifiedPayment[0].sp_message,
+        "transaction.transactionStatus": verifiedPayment[0].transaction_status,
+        "transaction.method": verifiedPayment[0].method,
+        "transaction.date_time": verifiedPayment[0].date_time,
+        status:
+          verifiedPayment[0].bank_status == "Success"
+            ? "Paid"
+            : verifiedPayment[0].bank_status == "Failed"
+            ? "Pending"
+            : verifiedPayment[0].bank_status == "Cancel"
+            ? "Cancelled"
+            : "",
+      }
+    );
+  }
+
+  return verifiedPayment;
+};
+
+
 /* ---------- Logic for Delete an Order from Database  ---------- */
 const deleteAnOrderFromDB = async (orderId: string) => {
   const result = await Order.findByIdAndDelete({ _id: orderId });
@@ -104,5 +164,6 @@ export const OrderServices = {
   getAllOrdersFromDB,
   getSingleUserOrdersFromDB,
   updateSingleOrderFromDB,
+  verifyPayment,
   deleteAnOrderFromDB,
 };

@@ -13,6 +13,14 @@ const orderSchema = new Schema<TOrder>(
       ref: 'Car',
       required: true,
     },
+    customerInfo: {
+      name: { type: String, required: true },
+      address: { type: String, required: true },
+      email: { type: String, required: true },
+      phone: { type: String, required: true },
+      city: { type: String, required: true },
+      userIP: { type: String, default: "118.179.204.125" },
+    },
     quantity: {
       type: Number,
       required: true,
@@ -39,7 +47,7 @@ const orderSchema = new Schema<TOrder>(
   {
     timestamps: true,
     versionKey: false,
-  },
+  }
 );
 
 export const Order = model<TOrder>('Order', orderSchema);
