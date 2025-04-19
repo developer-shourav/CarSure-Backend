@@ -7,6 +7,7 @@ import { orderUtils } from './order.utils';
 
 /* ----------- Logic for Create a new order and manage inventory ----------- */
 const createNewOrder = async (orderData: TOrder) => {
+  const customerDetails = orderData?.customerInfo;
   //----------- Find the car by its ID
   const car = await Car.findById(orderData.carId);
   if (!car) {
@@ -41,8 +42,33 @@ const createNewOrder = async (orderData: TOrder) => {
   await car.save();
 
   //----------- Create a new order
-  const newOrder = await Order.create(orderData);
-  return newOrder;
+  let order = await Order.create(orderData);
+
+ // payment integration
+ const shurjopayPayload = {
+  amount: totalPrice,
+  order_id: order._id,
+  currency: "BDT",
+  customer_name: customerDetails.name,
+  customer_address: customerDetails.address,
+  customer_email: customerDetails.email,
+  customer_phone: customerDetails.phone,
+  customer_city: customerDetails.city,
+  client_ip: customerDetails.userIP,
+};
+
+const payment = await orderUtils.makePaymentAsync(shurjopayPayload);
+
+if (payment?.transactionStatus) {
+  order = await order.updateOne({
+    transaction: {
+      id: payment.sp_order_id,
+      transactionStatus: payment.transactionStatus,
+    },
+  });
+}
+
+return payment.checkout_url;
 };
 
 /* ---------- Logic for Calculate Revenue from Orders  ---------- */

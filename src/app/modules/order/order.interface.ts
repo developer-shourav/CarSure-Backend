@@ -3,6 +3,14 @@ import { Types } from 'mongoose';
 export type TOrder = {
   user: Types.ObjectId;
   carId: Types.ObjectId;
+  customerInfo: {
+    name: string;
+    address: string;
+    email: string;
+    phone: string;
+    city: string;
+    userIP: string;
+  };
   quantity: number;
   totalPrice: number;
   status: "Pending" | "Paid" | "Shipped" | "Completed" | "Cancelled";

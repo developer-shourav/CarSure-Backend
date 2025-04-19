@@ -15,6 +15,16 @@ const transactionSchema = z.object({
   date_time: z.string().optional(),
 }).optional();
 
+// Required customer info schema
+const customerInfoSchema = z.object({
+  name: z.string(),
+  address: z.string(),
+  email: z.string().email(),
+  phone: z.string(),
+  city: z.string(),
+  userIP: z.string().optional(),
+});
+
 // -------------------- Create Order Validation --------------------
 const orderValidationSchema = z.object({
   body: z.object({
@@ -24,6 +34,7 @@ const orderValidationSchema = z.object({
     carId: z
       .string()
       .refine((val) => Types.ObjectId.isValid(val), 'Invalid car ObjectId'),
+    customerInfo: customerInfoSchema,
     quantity: z.number().min(1, 'Quantity must be at least 1'),
     totalPrice: z.number().min(1, 'Total price must be more than 0'),
     status: statusEnum.optional(),
@@ -42,6 +53,7 @@ const orderUpdateValidationSchema = z.object({
       .string()
       .refine((val) => Types.ObjectId.isValid(val), 'Invalid car ObjectId')
       .optional(),
+    customerInfo: customerInfoSchema.optional(),
     quantity: z.number().min(1, 'Quantity must be at least 1').optional(),
     totalPrice: z.number().min(1, 'Total price must be more than 0').optional(),
     status: statusEnum.optional(),
