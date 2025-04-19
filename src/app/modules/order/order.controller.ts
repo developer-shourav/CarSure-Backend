@@ -71,13 +71,24 @@ const updateAnOrder = catchAsync(async (req, res) => {
 });
 
 /* ------------------- Delete an order ------------------- */
+const verifyAnOrder = catchAsync(async (req, res) => {
+  const order_id = req.query.order_id as string;
+  const result = await OrderServices.verifyPayment(order_id);
+
+  /* ----Send success response to frontend ------ */
+  sendResponse(res, httpStatus.OK, {
+    message: 'Order deleted successfully',
+    data: result,
+  });
+});
+/* ------------------- Delete an order ------------------- */
 const deleteAnOrder = catchAsync(async (req, res) => {
   const { orderId } = req.params;
   await OrderServices.deleteAnOrderFromDB(orderId);
 
   /* ----Send success response to frontend ------ */
   sendResponse(res, httpStatus.OK, {
-    message: 'Order deleted successfully',
+    message: "Order verified successfully",
     data: {},
   });
 });
@@ -88,5 +99,6 @@ export const OrderControllers = {
   getAllOrders,
   getSingleUserOrders,
   updateAnOrder,
+  verifyAnOrder,
   deleteAnOrder,
 };
