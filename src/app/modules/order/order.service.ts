@@ -7,7 +7,7 @@ import { Order } from './order.model';
 /* ----------- Logic for Create a new order and manage inventory ----------- */
 const createNewOrder = async (orderData: TOrder) => {
   //----------- Find the car by its ID
-  const car = await Car.findById(orderData.productDetails);
+  const car = await Car.findById(orderData.carId);
   if (!car) {
     throw new AppError(httpStatus.NOT_FOUND, 'Car not found!');
   }
