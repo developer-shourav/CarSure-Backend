@@ -80,4 +80,4 @@ userSchema.statics.isJwtTokenIssuedBeforePasswordChanged = function (
   return passwordChangedTimeInSeconds > jwtIssuedTimestamp;
 };
 
-export const User = model<TUser, UserModel>('user', userSchema);
+export const User = model<TUser, UserModel>('User', userSchema);

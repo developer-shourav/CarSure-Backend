@@ -42,33 +42,33 @@ const createNewOrder = async (orderData: TOrder) => {
   await car.save();
 
   //----------- Create a new order
-  let order = await Order.create(orderData);
+  const order = await Order.create(orderData);
 
- // payment integration
- const shurjopayPayload = {
-  amount: totalPrice,
-  order_id: order._id,
-  currency: "BDT",
-  customer_name: customerDetails.name,
-  customer_address: customerDetails.address,
-  customer_email: customerDetails.email,
-  customer_phone: customerDetails.phone,
-  customer_city: customerDetails.city,
-  client_ip: customerDetails.userIP,
-};
+  // payment integration
+  const shurjopayPayload = {
+    amount: totalPrice,
+    order_id: order._id,
+    currency: "BDT",
+    customer_name: customerDetails.name,
+    customer_address: customerDetails.address,
+    customer_email: customerDetails.email,
+    customer_phone: customerDetails.phone,
+    customer_city: customerDetails.city,
+    client_ip: customerDetails.userIP,
+  };
 
-const payment = await orderUtils.makePaymentAsync(shurjopayPayload);
+  const payment = await orderUtils.makePaymentAsync(shurjopayPayload);
 
-if (payment?.transactionStatus) {
-  order = await order.updateOne({
-    transaction: {
-      id: payment.sp_order_id,
-      transactionStatus: payment.transactionStatus,
-    },
-  });
-}
+  if (payment?.transactionStatus) {
+    await Order.updateOne({
+      transaction: {
+        id: payment.sp_order_id,
+        transactionStatus: payment.transactionStatus,
+      },
+    });
+  }
 
-return payment.checkout_url;
+  return payment.checkout_url;
 };
 
 /* ---------- Logic for Calculate Revenue from Orders  ---------- */
@@ -119,6 +119,7 @@ const updateSingleOrderFromDB = async (
 /* ---------------Verify Payment ---------------- */
 const verifyPayment = async (order_id: string) => {
   const verifiedPayment = await orderUtils.verifyPaymentAsync(order_id);
+  console.log("🚀 ~ verifyPayment ~ verifiedPayment:", verifiedPayment)
 
   if (verifiedPayment.length) {
     await Order.findOneAndUpdate(
@@ -136,10 +137,10 @@ const verifyPayment = async (order_id: string) => {
           verifiedPayment[0].bank_status == "Success"
             ? "Paid"
             : verifiedPayment[0].bank_status == "Failed"
-            ? "Pending"
-            : verifiedPayment[0].bank_status == "Cancel"
-            ? "Cancelled"
-            : "",
+              ? "Pending"
+              : verifiedPayment[0].bank_status == "Cancel"
+                ? "Cancelled"
+                : "",
       }
     );
   }

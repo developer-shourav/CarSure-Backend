@@ -73,11 +73,12 @@ const updateAnOrder = catchAsync(async (req, res) => {
 /* ------------------- Delete an order ------------------- */
 const verifyAnOrder = catchAsync(async (req, res) => {
   const order_id = req.query.order_id as string;
+  console.log("🚀 ~ verifyAnOrder ~ order_id:", order_id)
   const result = await OrderServices.verifyPayment(order_id);
 
   /* ----Send success response to frontend ------ */
   sendResponse(res, httpStatus.OK, {
-    message: 'Order deleted successfully',
+    message: 'Order verification info retrieved successfully',
     data: result,
   });
 });

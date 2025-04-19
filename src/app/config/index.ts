@@ -19,7 +19,7 @@ export default {
   SP_USERNAME: process.env.SP_USERNAME,
   SP_PASSWORD: process.env.SP_PASSWORD,
   SP_PREFIX: process.env.SP_PREFIX,
-  SP_RETURN_UR: process.env.SP_RETURN_UR,
+  SP_RETURN_URL: process.env.SP_RETURN_URL,
   nodemailer_user: process.env.NODE_MAILER_USER,
   nodemailer_pass: process.env.NODE_MAILER_PASS,
   reset_password_ui_link: process.env.RESET_PASSWORD_UI_LINK,

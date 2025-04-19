@@ -9,7 +9,7 @@ shurjopay.config(
   config.SP_USERNAME!,
   config.SP_PASSWORD!,
   config.SP_PREFIX!,
-  config.SP_RETURN_UR!,
+  config.SP_RETURN_URL!,
 );
 
 // console.log(shurjopay);

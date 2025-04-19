@@ -10,6 +10,7 @@ import handleDuplicateError from '../errors/handleDuplicateError';
 import AppError from '../errors/AppError';
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
+  console.log("🚀 ~ err:", err)
   // --------- Initialize  Default Values
   let statusCode = 500; // Internal Server Error
   let message = 'Something went wrong!';
@@ -22,7 +23,6 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   ];
 
   /* --------------Ensure the error type ------------- */
-
   // ---- Zod Error Handler
   if (err instanceof ZodError) {
     const simplifiedError = handleZodError(err);

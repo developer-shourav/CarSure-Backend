@@ -35,7 +35,7 @@ router.patch(
 router.get(
   '/verify',
   auth(USER_ROLE.user),
-  OrderControllers.updateAnOrder,
+  OrderControllers.verifyAnOrder,
 );
 
 /* -------Delete an order */
