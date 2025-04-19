@@ -64,9 +64,9 @@ const getAllOrdersFromDB = async () => {
   return result;
 };
 
-/* ---------- Logic for Get An order From Database  ---------- */
-const getAnOrderFromDB = async (orderId: string) => {
-  const result = await Order.findOne({ _id: orderId });
+/* ---------- Logic for Get An user All orders From Database  ---------- */
+const getSingleUserOrdersFromDB = async (userId: string) => {
+  const result = await Order.find({ user: userId });
   if (!result) {
     throw new AppError(httpStatus.NOT_FOUND, 'Order not found!');
   }
@@ -102,7 +102,7 @@ export const OrderServices = {
   createNewOrder,
   calculateTotalRevenue,
   getAllOrdersFromDB,
-  getAnOrderFromDB,
+  getSingleUserOrdersFromDB,
   updateSingleOrderFromDB,
   deleteAnOrderFromDB,
 };
