@@ -119,7 +119,6 @@ const updateSingleOrderFromDB = async (
 /* ---------------Verify Payment ---------------- */
 const verifyPayment = async (order_id: string) => {
   const verifiedPayment = await orderUtils.verifyPaymentAsync(order_id);
-  console.log("🚀 ~ verifyPayment ~ verifiedPayment:", verifiedPayment)
 
   if (verifiedPayment.length) {
     await Order.findOneAndUpdate(

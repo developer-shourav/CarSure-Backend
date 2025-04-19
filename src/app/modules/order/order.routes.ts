@@ -33,7 +33,7 @@ router.patch(
 );
 /* -------Verify An order */
 router.get(
-  '/verify',
+  '/verifyPayment/:order_id',
   auth(USER_ROLE.user),
   OrderControllers.verifyAnOrder,
 );

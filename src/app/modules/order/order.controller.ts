@@ -72,8 +72,17 @@ const updateAnOrder = catchAsync(async (req, res) => {
 
 /* ------------------- Delete an order ------------------- */
 const verifyAnOrder = catchAsync(async (req, res) => {
-  const order_id = req.query.order_id as string;
-  console.log("🚀 ~ verifyAnOrder ~ order_id:", order_id)
+  const { order_id } = req.params;
+
+  // Ensure order_id is provided
+  if (!order_id) {
+    return sendResponse(res, httpStatus.BAD_REQUEST, {
+      message: 'order_id is required',
+      data: null,
+    });
+  }
+
+  // Proceed with verification using the string order_id
   const result = await OrderServices.verifyPayment(order_id);
 
   /* ----Send success response to frontend ------ */
@@ -82,6 +91,7 @@ const verifyAnOrder = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
 /* ------------------- Delete an order ------------------- */
 const deleteAnOrder = catchAsync(async (req, res) => {
   const { orderId } = req.params;
