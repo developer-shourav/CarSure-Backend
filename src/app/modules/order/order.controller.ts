@@ -40,10 +40,10 @@ const getAllOrders = catchAsync(async (req, res) => {
   });
 });
 
-/* ------------------- Get Single Order ------------------- */
-const getAnOrder = catchAsync(async (req, res) => {
-  const { orderId } = req.params;
-  const result = await OrderServices.getAnOrderFromDB(orderId);
+/* ------------------- Get Single User's Orders ------------------- */
+const getSingleUserOrders = catchAsync(async (req, res) => {
+  const { userId } = req.params;
+  const result = await OrderServices.getSingleUserOrdersFromDB(userId);
 
   /* ----Send success response to frontend ------ */
   sendResponse(res, httpStatus.OK, {
@@ -86,7 +86,7 @@ export const OrderControllers = {
   createAnOrder,
   getRevenue,
   getAllOrders,
-  getAnOrder,
+  getSingleUserOrders,
   updateAnOrder,
   deleteAnOrder,
 };
