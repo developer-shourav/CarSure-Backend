@@ -21,6 +21,28 @@ const userValidationSchema = z.object({
   }),
 });
 
+const changePasswordSchema = z.object({
+  body: z.object({
+    currentPassword: z
+      .string({ invalid_type_error: 'Current password must be a string' })
+      .min(1, { message: 'Current password is required' }),
+    newPassword: z
+      .string({ invalid_type_error: 'New password must be a string' })
+      .min(6, { message: 'New password must be at least 6 characters' })
+      .max(20, { message: 'New password cannot be more than 20 characters' }),
+  }),
+});
+
+const updateUserInfoSchema = z.object({
+  body: z.object({
+    name: z.string().optional(),
+    email: z.string().email().optional(),
+    profileImg: z.string().optional(),
+  }),
+});
+
 export const userValidation = {
   userValidationSchema,
+  changePasswordSchema,
+  updateUserInfoSchema,
 };

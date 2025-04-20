@@ -20,4 +20,20 @@ router.post(
 // -----------Get All Users
 router.get('/all', auth(USER_ROLE.admin), UserControllers.getAllUsers);
 
+// -----------Change Password
+router.patch(
+  '/change-password',
+  auth(USER_ROLE.user),
+  validateRequest(userValidation.changePasswordSchema),
+  UserControllers.changePassword,
+);
+
+// -----------Update User Information
+router.patch(
+  '/update-info',
+  auth(USER_ROLE.user),
+  validateRequest(userValidation.updateUserInfoSchema),
+  UserControllers.updateUserInfo,
+);
+
 export const UserRoutes = router;

@@ -28,7 +28,35 @@ const getAllUsers = catchAsync(async (req, res) => {
   });
 });
 
+/* ----------------------Change Password----------------- */
+const changePassword = catchAsync(async (req, res) => {
+  const userId = req.user.userId; // Authenticated user's ID
+  const { currentPassword, newPassword } = req.body;
+
+  await UserServices.changePassword(userId, currentPassword, newPassword);
+
+  sendResponse(res, 200, {
+    message: 'Password changed successfully',
+    data: null,
+  });
+});
+
+/* ----------------------Update User Info----------------- */
+const updateUserInfo = catchAsync(async (req, res) => {
+  const userId = req.user.userId; // Authenticated user's ID
+  const updates = req.body;
+
+  const result = await UserServices.updateUserInfo(userId, updates);
+
+  sendResponse(res, 200, {
+    message: 'User information updated successfully',
+    data: result,
+  });
+});
+
 export const UserControllers = {
   createUser,
   getAllUsers,
+  changePassword,
+  updateUserInfo,
 };

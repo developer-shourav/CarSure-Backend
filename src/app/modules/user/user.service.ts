@@ -37,7 +37,47 @@ const getAllUsersFromBD = async () => {
   }
   return result;
 };
+
+/* ----------------------Change Password----------------- */
+const changePassword = async (
+  userId: string,
+  currentPassword: string,
+  newPassword: string,
+) => {
+  const user = await User.findById(userId).select('+password');
+  if (!user) {
+    throw new AppError(404, 'User not found');
+  }
+
+  const isPasswordMatched = await User.isPasswordMatched(
+    currentPassword,
+    user.password,
+  );
+  if (!isPasswordMatched) {
+    throw new AppError(400, 'Current password is incorrect');
+  }
+
+  user.password = newPassword; // Mongoose pre-save middleware will hash it
+  await user.save();
+};
+
+/* ----------------------Update User Info----------------- */
+const updateUserInfo = async (userId: string, updates: Partial<TUser>) => {
+  const user = await User.findByIdAndUpdate(userId, updates, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!user) {
+    throw new AppError(404, 'User not found');
+  }
+
+  return user;
+};
+
 export const UserServices = {
   createUserIntoDB,
   getAllUsersFromBD,
+  changePassword,
+  updateUserInfo,
 };
