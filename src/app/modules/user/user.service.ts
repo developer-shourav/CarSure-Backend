@@ -62,8 +62,15 @@ const changePassword = async (
 };
 
 /* ----------------------Update User Info----------------- */
-const updateUserInfo = async (userId: string, updates: Partial<TUser>) => {
-  const user = await User.findByIdAndUpdate(userId, updates, {
+const updateUserInfo = async (userId: string, imageFileDetails: any, payload: Partial<TUser>) => {
+  // ----------send Image to the cloudinary----------
+  if (imageFileDetails) {
+    const imagePath = imageFileDetails?.path;
+    const { imageName } = uniqueUserImageNameGenerator(payload.name || 'userImage');
+    const { secure_url } = await hostImageToCloudinary(imageName, imagePath);
+    payload.profileImg = secure_url as string;
+  }
+  const user = await User.findByIdAndUpdate(userId, payload, {
     new: true,
     runValidators: true,
   });
