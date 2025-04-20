@@ -42,12 +42,19 @@ const getAllOrders = catchAsync(async (req, res) => {
 
 /* ------------------- Get Single User's Orders ------------------- */
 const getSingleUserOrders = catchAsync(async (req, res) => {
+  const loggedInUser = req.user.userId;
   const { userId } = req.params;
+  if(loggedInUser !== userId) {
+    return sendResponse(res, httpStatus.UNAUTHORIZED, {
+      message: 'You are not authorized to access this resource',
+      data: null,
+    });
+  }
   const result = await OrderServices.getSingleUserOrdersFromDB(userId);
 
   /* ----Send success response to frontend ------ */
   sendResponse(res, httpStatus.OK, {
-    message: 'Order retrieved successfully',
+    message: 'User all orders retrieved successfully',
     data: result,
   });
 });
