@@ -1,6 +1,7 @@
 import catchAsync from '../../utils/catchAsync';
 import { UserServices } from './user.service';
 import sendResponse from '../../utils/sendResponse';
+import httpStatus from 'http-status';
 /* ----------------------Create An User----------------- */
 const createUser = catchAsync(async (req, res) => {
   const imageFileDetails = req.file;
@@ -19,11 +20,30 @@ const createUser = catchAsync(async (req, res) => {
 });
 
 /* ----------------Get All Users------------------- */
-
 const getAllUsers = catchAsync(async (req, res) => {
   const result = await UserServices.getAllUsersFromBD();
   sendResponse(res, 200, {
     message: 'Users retrieved successfully',
+    data: result,
+  });
+});
+
+
+/* ----------------Get Single User------------------- */
+const getSingleUser = catchAsync(async (req, res) => {
+
+  const loggedInUser = req.user.userId;
+  const { userId } = req.params;
+
+  if(loggedInUser !== userId) {
+    return sendResponse(res, httpStatus.UNAUTHORIZED, {
+      message: 'You are not authorized to access this resource',
+      data: null,
+    });
+  }
+  const result = await UserServices.getSingleUserFromBD(userId);
+  sendResponse(res, 200, {
+    message: 'User retrieved successfully',
     data: result,
   });
 });
@@ -57,6 +77,7 @@ const updateUserInfo = catchAsync(async (req, res) => {
 export const UserControllers = {
   createUser,
   getAllUsers,
+  getSingleUser,
   changePassword,
   updateUserInfo,
 };

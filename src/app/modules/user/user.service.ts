@@ -31,9 +31,18 @@ const createUserIntoDB = async (imageFileDetails: any, payload: TUser) => {
 
 /* ---------------------Get All Users from Database------------------- */
 const getAllUsersFromBD = async () => {
-  const result = User.find();
+  const result = await User.find();
   if (!result) {
     throw new AppError(404, 'Users not found!');
+  }
+  return result;
+};
+
+/* ---------------------Get Single User from Database------------------- */
+const getSingleUserFromBD = async (id: string) => {
+  const result = await User.findById(id);
+  if (!result) {
+    throw new AppError(404, 'User not found!');
   }
   return result;
 };
@@ -78,6 +87,7 @@ const updateUserInfo = async (userId: string, updates: Partial<TUser>) => {
 export const UserServices = {
   createUserIntoDB,
   getAllUsersFromBD,
+  getSingleUserFromBD,
   changePassword,
   updateUserInfo,
 };
