@@ -32,8 +32,6 @@ router.patch(
 router.patch(
   '/update-info',
   auth(USER_ROLE.user),
-  upload.single('profileImg'),
-  formDataToJsonConvertor,
   validateRequest(userValidation.updateUserInfoSchema),
   UserControllers.updateUserInfo,
 );

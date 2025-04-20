@@ -44,10 +44,9 @@ const changePassword = catchAsync(async (req, res) => {
 /* ----------------------Update User Info----------------- */
 const updateUserInfo = catchAsync(async (req, res) => {
   const userId = req.user.userId; // Authenticated user's ID
-  const imageFileDetails = req.file;
   const updates = req.body;
 
-  const result = await UserServices.updateUserInfo(userId, imageFileDetails, updates);
+  const result = await UserServices.updateUserInfo(userId, updates);
 
   sendResponse(res, 200, {
     message: 'User information updated successfully',
