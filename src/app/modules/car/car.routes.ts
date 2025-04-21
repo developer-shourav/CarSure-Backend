@@ -4,16 +4,12 @@ import validateRequest from '../../middlewares/validateRequest';
 import { CarValidation } from './car.validation';
 import auth from '../../middlewares/auth';
 import { USER_ROLE } from '../user/user.constant';
-import { upload } from '../../utils/hostImageToCloudinary';
-import { formDataToJsonConvertor } from '../../middlewares/formDataToJsonConvertor';
 const router = express.Router();
 
 /* -------Create a Car */
 router.post(
   '/',
   auth(USER_ROLE.admin),
-  upload.single('productImg'),
-  formDataToJsonConvertor,
   validateRequest(CarValidation.carValidationSchema),
   CarControllers.addNewCar,
 );

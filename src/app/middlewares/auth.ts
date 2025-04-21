@@ -23,7 +23,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
         config.jwt_access_secret as string,
       ) as JwtPayload;
     } catch (err) {
-      throw new AppError(httpStatus.UNAUTHORIZED, 'Unauthorized!');
+      throw new AppError(httpStatus.UNAUTHORIZED, 'Unauthorized! Invalid token.');
     }
 
     const { userEmail, role } = decoded;

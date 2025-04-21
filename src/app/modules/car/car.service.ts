@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
 import AppError from '../../errors/AppError';
-import { hostImageToCloudinary } from '../../utils/hostImageToCloudinary';
 import { TCar } from './car.interface';
 import { Car } from './car.model';
-import { uniqueCarImageNameGenerator } from '../../utils/uniqueImageNameGenerator';
 import QueryBuilder from '../../builder/QueryBuilder';
 
 /* --------Logic For add a car to DataBase------ */
-const addNewCarIntoDB = async (imageFileDetails: any, carData: TCar) => {
+const addNewCarIntoDB = async (carData: TCar) => {
   // Check The same car already exist or not
   if (
     await Car.isCarExists(
@@ -20,20 +18,6 @@ const addNewCarIntoDB = async (imageFileDetails: any, carData: TCar) => {
     )
   ) {
     throw new AppError(httpStatus.CONFLICT, 'Car already exist!');
-  }
-
-  // ----------send Image to the cloudinary----------
-  if (imageFileDetails) {
-    const imagePath = imageFileDetails?.path;
-    const { imageName } = uniqueCarImageNameGenerator(
-      carData.carName,
-      carData.brand,
-      carData.model,
-      carData.year,
-    );
-    const { secure_url } = await hostImageToCloudinary(imageName, imagePath);
-
-    carData.productImg = secure_url as string;
   }
 
   const result = await Car.create(carData);

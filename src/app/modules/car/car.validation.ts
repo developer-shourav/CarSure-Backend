@@ -11,6 +11,7 @@ const carValidationSchema = z.object({
     category: z.enum(['sedan', 'suv', 'sports', 'coupe', 'convertible']),
     description: z.string(),
     quantity: z.number().min(1, 'Quantity must be at least 1'), // Quantity is a whole number and non-negative
+    productImg: z.string().optional(), // Optional field for product image URL
     inStock: z.boolean(),
   })
 });
@@ -29,6 +30,7 @@ const carUpdateValidationSchema = z.object({
       .optional(),
     description: z.string().optional(),
     quantity: z.number().min(1, 'Quantity must be at least 1').optional(), // Quantity is a whole number and non-negative
+    productImg: z.string().optional(), // Optional field for product image URL
     inStock: z.boolean().optional(),
   })
 });
