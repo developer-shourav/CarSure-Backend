@@ -25,7 +25,7 @@ router.get('/:userId', auth(USER_ROLE.user), UserControllers.getSingleUser);
 // -----------Change Password
 router.patch(
   '/change-password',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.admin),
   validateRequest(userValidation.changePasswordSchema),
   UserControllers.changePassword,
 );
