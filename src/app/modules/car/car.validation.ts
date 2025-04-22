@@ -29,7 +29,7 @@ const carUpdateValidationSchema = z.object({
       .enum(['sedan', 'suv', 'sports', 'coupe', 'convertible'])
       .optional(),
     description: z.string().optional(),
-    quantity: z.number().min(1, 'Quantity must be at least 1').optional(), // Quantity is a whole number and non-negative
+    quantity: z.number().min(0, 'Quantity must be at least 1').optional(), // Quantity is a whole number and non-negative
     productImg: z.string().optional(), // Optional field for product image URL
     inStock: z.boolean().optional(),
   })
