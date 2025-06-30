@@ -8,6 +8,7 @@ export type TCar = {
   model: string;
   year: number;
   price: number;
+  rating: number;
   category: TCarCategory;
   description: string;
   quantity: number;

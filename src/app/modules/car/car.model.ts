@@ -28,6 +28,11 @@ const carSchema = new Schema<TCar, CarModel>(
       required: true,
       min: 0,
     },
+    rating: {
+      type: Number,
+      default: 5,
+      min: 1,
+    },
     category: {
       type: String,
       enum: {
