@@ -48,7 +48,8 @@ const carSchema = new Schema<TCar, CarModel>(
       type: Number,
       required: true,
     },
-    productImg: { type: String, default: '' },
+    productImg: { type: Schema.Types.Mixed, required: true, },
+
     inStock: {
       type: Boolean,
       required: true,

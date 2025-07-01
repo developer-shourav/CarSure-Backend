@@ -7,7 +7,7 @@ import QueryBuilder from '../../builder/QueryBuilder';
 
 /* --------Logic For add a car to DataBase------ */
 const addNewCarIntoDB = async (carData: TCar) => {
-  // Check The same car already exist or not
+  // Check if the car already exists
   if (
     await Car.isCarExists(
       carData.carName,
@@ -20,9 +20,28 @@ const addNewCarIntoDB = async (carData: TCar) => {
     throw new AppError(httpStatus.CONFLICT, 'Car already exist!');
   }
 
-  const result = await Car.create(carData);
+  // Normalize productImg to always be an array
+  let normalizedProductImg: string[] | undefined;
+
+  if (typeof carData.productImg === 'string') {
+    normalizedProductImg = carData.productImg ? [carData.productImg] : [];
+  } else if (Array.isArray(carData.productImg)) {
+    normalizedProductImg = carData.productImg;
+  }
+
+  // Create the car
+  const result = await Car.create({
+    ...carData,
+    productImg: normalizedProductImg,
+  });
+
+  if (!result) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create car!');
+  }
+
   return result;
 };
+
 /* --------------Logic For get all cars form Database --------- */
 const getAllCarsFromDB = async (query: Record<string, unknown>) => {
   const carSearchFields = [
@@ -62,16 +81,38 @@ const updateSingleCarFromDB = async (
   carId: string,
   carUpdates: Partial<TCar>,
 ) => {
-  const updatedCar = await Car.findByIdAndUpdate(
-    carId,
-    carUpdates,
-    { new: true, runValidators: true }, // Return the updated document and apply validation
-  );
-  if (!updatedCar) {
+  const updateData: Partial<TCar> = { ...carUpdates };
+
+  // Check if the car exists
+  const existingCar = await Car.findById(carId);
+  if (!existingCar) {
     throw new AppError(httpStatus.NOT_FOUND, 'Car not found!');
   }
+
+  // Normalize productImg if present
+  if ('productImg' in carUpdates) {
+    if (typeof carUpdates.productImg === 'string') {
+      updateData.productImg = carUpdates.productImg
+        ? [carUpdates.productImg]
+        : [];
+    } else if (Array.isArray(carUpdates.productImg)) {
+      updateData.productImg = carUpdates.productImg;
+    }
+  }
+
+  const updatedCar = await Car.findByIdAndUpdate(
+    carId,
+    updateData,
+    { new: true, runValidators: true },
+  );
+
+  if (!updatedCar) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'Failed to update car!');
+  }
+
   return updatedCar;
 };
+
 
 /* --------------Logic For get single car form Database --------- */
 const deleteSingleCarFromDB = async (carId: string) => {
