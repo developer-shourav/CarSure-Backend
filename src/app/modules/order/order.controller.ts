@@ -44,7 +44,7 @@ const getAllOrders = catchAsync(async (req, res) => {
 const getSingleUserOrders = catchAsync(async (req, res) => {
   const loggedInUser = req.user.userId;
   const { userId } = req.params;
-  if(loggedInUser !== userId) {
+  if (loggedInUser !== userId) {
     return sendResponse(res, httpStatus.UNAUTHORIZED, {
       message: 'You are not authorized to access this resource',
       data: null,
@@ -106,7 +106,7 @@ const deleteAnOrder = catchAsync(async (req, res) => {
 
   /* ----Send success response to frontend ------ */
   sendResponse(res, httpStatus.OK, {
-    message: "Order verified successfully",
+    message: 'Order verified successfully',
     data: {},
   });
 });

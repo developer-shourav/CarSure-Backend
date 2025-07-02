@@ -14,6 +14,7 @@ export type TCar = {
   quantity: number;
   productImg: string | string[];
   inStock: boolean;
+  isDeleted: boolean;
 };
 
 export interface CarModel extends Model<TCar> {

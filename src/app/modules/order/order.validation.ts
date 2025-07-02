@@ -2,18 +2,26 @@ import { z } from 'zod';
 import { Types } from 'mongoose';
 
 // Enum for status values
-const statusEnum = z.enum(["Pending", "Paid", "Shipped", "Completed", "Cancelled"]);
+const statusEnum = z.enum([
+  'Pending',
+  'Paid',
+  'Shipped',
+  'Completed',
+  'Cancelled',
+]);
 
 // Optional nested transaction schema
-const transactionSchema = z.object({
-  id: z.string().optional(),
-  transactionStatus: z.string().optional(),
-  bank_status: z.string().optional(),
-  sp_code: z.string().optional(),
-  sp_message: z.string().optional(),
-  method: z.string().optional(),
-  date_time: z.string().optional(),
-}).optional();
+const transactionSchema = z
+  .object({
+    id: z.string().optional(),
+    transactionStatus: z.string().optional(),
+    bank_status: z.string().optional(),
+    sp_code: z.string().optional(),
+    sp_message: z.string().optional(),
+    method: z.string().optional(),
+    date_time: z.string().optional(),
+  })
+  .optional();
 
 // Required customer info schema
 const customerInfoSchema = z.object({
@@ -39,7 +47,7 @@ const orderValidationSchema = z.object({
     totalPrice: z.number().min(1, 'Total price must be more than 0'),
     status: statusEnum.optional(),
     transaction: transactionSchema,
-  })
+  }),
 });
 
 // -------------------- Update Order Validation --------------------
@@ -58,7 +66,7 @@ const orderUpdateValidationSchema = z.object({
     totalPrice: z.number().min(1, 'Total price must be more than 0').optional(),
     status: statusEnum.optional(),
     transaction: transactionSchema,
-  })
+  }),
 });
 
 export const OrderValidation = {

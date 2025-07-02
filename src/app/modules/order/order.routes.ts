@@ -22,7 +22,11 @@ router.get('/revenue', auth(USER_ROLE.admin), OrderControllers.getRevenue);
 router.get('/', auth(USER_ROLE.admin), OrderControllers.getAllOrders);
 
 /* -------Get Single User's orders */
-router.get('/:userId', auth(USER_ROLE.user), OrderControllers.getSingleUserOrders);
+router.get(
+  '/:userId',
+  auth(USER_ROLE.user),
+  OrderControllers.getSingleUserOrders,
+);
 
 /* -------Update Single order */
 router.patch(
@@ -39,6 +43,10 @@ router.get(
 );
 
 /* -------Delete an order */
-router.delete('/:orderId', auth(USER_ROLE.admin), OrderControllers.deleteAnOrder);
+router.delete(
+  '/:orderId',
+  auth(USER_ROLE.admin),
+  OrderControllers.deleteAnOrder,
+);
 
 export const OrderRoutes = router;

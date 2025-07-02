@@ -10,7 +10,12 @@ const app: Application = express();
 /* --------Parser--------- */
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: ['http://localhost:5173', 'https://car-sure.vercel.app'], credentials: true }));
+app.use(
+  cors({
+    origin: ['http://localhost:5173', 'https://car-sure.vercel.app'],
+    credentials: true,
+  }),
+);
 
 /* ------- Root Route ----------*/
 app.use('/api', router);

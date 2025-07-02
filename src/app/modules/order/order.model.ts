@@ -19,7 +19,7 @@ const orderSchema = new Schema<TOrder>(
       email: { type: String, required: true },
       phone: { type: String, required: true },
       city: { type: String, required: true },
-      userIP: { type: String, default: "118.179.204.125" },
+      userIP: { type: String, default: '118.179.204.125' },
     },
     quantity: {
       type: Number,
@@ -31,8 +31,8 @@ const orderSchema = new Schema<TOrder>(
     },
     status: {
       type: String,
-      enum: ["Pending", "Paid", "Shipped", "Completed", "Cancelled"],
-      default: "Pending",
+      enum: ['Pending', 'Paid', 'Shipped', 'Completed', 'Cancelled'],
+      default: 'Pending',
     },
     transaction: {
       id: String,
@@ -47,7 +47,7 @@ const orderSchema = new Schema<TOrder>(
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
 export const Order = model<TOrder>('Order', orderSchema);

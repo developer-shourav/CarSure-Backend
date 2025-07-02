@@ -47,7 +47,7 @@
   - Register with name, email, and password
   - Login with JWT stored in `localStorage`
   - Logout clears session
-  - Default role: `user` 
+  - Default role: `user`
 
 - **Checkout**
 

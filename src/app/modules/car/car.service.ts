@@ -44,18 +44,10 @@ const addNewCarIntoDB = async (carData: TCar) => {
 
 /* --------------Logic For get all cars form Database --------- */
 const getAllCarsFromDB = async (query: Record<string, unknown>) => {
-  const carSearchFields = [
-    "carName",
-    "brand",
-    "model",
-    "description",
-  ];
+  const carSearchFields = ['carName', 'brand', 'model', 'description'];
 
   // Search, Filter, Sort, Pagination and Field Filtering Using Query Chaining Method
-  const carQuery = new QueryBuilder(
-    Car.find(),
-    query,
-  )
+  const carQuery = new QueryBuilder(Car.find({ isDeleted: false }), query)
     .search(carSearchFields)
     .filter()
     .sortBy()
@@ -66,10 +58,9 @@ const getAllCarsFromDB = async (query: Record<string, unknown>) => {
   return { meta, data };
 };
 
-
 /* --------------Logic For get single car form Database --------- */
 const getSingleCarFromDB = async (carId: string) => {
-  const result = await Car.findOne({ _id: carId });
+  const result = await Car.findOne({ _id: carId, isDeleted: false });
   if (!result) {
     throw new AppError(httpStatus.NOT_FOUND, 'Car not found!');
   }
@@ -84,7 +75,7 @@ const updateSingleCarFromDB = async (
   const updateData: Partial<TCar> = { ...carUpdates };
 
   // Check if the car exists
-  const existingCar = await Car.findById(carId);
+  const existingCar = await Car.findOne({ _id: carId, isDeleted: false });
   if (!existingCar) {
     throw new AppError(httpStatus.NOT_FOUND, 'Car not found!');
   }
@@ -100,11 +91,10 @@ const updateSingleCarFromDB = async (
     }
   }
 
-  const updatedCar = await Car.findByIdAndUpdate(
-    carId,
-    updateData,
-    { new: true, runValidators: true },
-  );
+  const updatedCar = await Car.findByIdAndUpdate(carId, updateData, {
+    new: true,
+    runValidators: true,
+  });
 
   if (!updatedCar) {
     throw new AppError(httpStatus.BAD_REQUEST, 'Failed to update car!');
@@ -113,13 +103,28 @@ const updateSingleCarFromDB = async (
   return updatedCar;
 };
 
-
 /* --------------Logic For get single car form Database --------- */
 const deleteSingleCarFromDB = async (carId: string) => {
-  const deleteCar = await Car.findByIdAndDelete({ _id: carId });
-  if (!deleteCar) {
+  const existingCar = await Car.findById(carId);
+
+  if (!existingCar) {
     throw new AppError(httpStatus.NOT_FOUND, 'Car not found!');
   }
+
+  if (existingCar.isDeleted) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'Car is already deleted!');
+  }
+
+  const deleteCar = await Car.findByIdAndUpdate(
+    carId,
+    { isDeleted: true },
+    { new: true, runValidators: true },
+  );
+
+  if (!deleteCar) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'Failed to delete car!');
+  }
+
   return deleteCar;
 };
 

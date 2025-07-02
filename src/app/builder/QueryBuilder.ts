@@ -57,8 +57,8 @@ class QueryBuilder<T> {
     if (!isNaN(minPrice) || !isNaN(maxPrice)) {
       const priceCondition: Record<string, number> = {};
 
-      if (!isNaN(minPrice)) priceCondition["$gte"] = minPrice;
-      if (!isNaN(maxPrice)) priceCondition["$lte"] = maxPrice;
+      if (!isNaN(minPrice)) priceCondition['$gte'] = minPrice;
+      if (!isNaN(maxPrice)) priceCondition['$lte'] = maxPrice;
 
       andConditions.push({ price: priceCondition } as FilterQuery<T>);
     }
@@ -80,7 +80,6 @@ class QueryBuilder<T> {
 
     return this;
   }
-
 
   // ------Method For Sorting ------
   sortBy() {

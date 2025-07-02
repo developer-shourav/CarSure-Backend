@@ -48,12 +48,16 @@ const carSchema = new Schema<TCar, CarModel>(
       type: Number,
       required: true,
     },
-    productImg: { type: Schema.Types.Mixed, required: true, },
+    productImg: { type: Schema.Types.Mixed, required: true },
 
     inStock: {
       type: Boolean,
       required: true,
       default: true,
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
     },
   },
   {
@@ -70,7 +74,13 @@ carSchema.statics.isCarExists = async function (
   year: number,
   category: string,
 ) {
-  const existingCar = await Car.findOne({ carName, brand, model, year, category });
+  const existingCar = await Car.findOne({
+    carName,
+    brand,
+    model,
+    year,
+    category,
+  });
   return existingCar;
 };
 

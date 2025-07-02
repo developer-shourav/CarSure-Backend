@@ -48,7 +48,7 @@ const createNewOrder = async (orderData: TOrder) => {
   const shurjopayPayload = {
     amount: totalPrice,
     order_id: order._id,
-    currency: "BDT",
+    currency: 'BDT',
     customer_name: customerDetails.name,
     customer_address: customerDetails.address,
     customer_email: customerDetails.email,
@@ -123,30 +123,29 @@ const verifyPayment = async (order_id: string) => {
   if (verifiedPayment.length) {
     await Order.findOneAndUpdate(
       {
-        "transaction.id": order_id,
+        'transaction.id': order_id,
       },
       {
-        "transaction.bank_status": verifiedPayment[0].bank_status,
-        "transaction.sp_code": verifiedPayment[0].sp_code,
-        "transaction.sp_message": verifiedPayment[0].sp_message,
-        "transaction.transactionStatus": verifiedPayment[0].transaction_status,
-        "transaction.method": verifiedPayment[0].method,
-        "transaction.date_time": verifiedPayment[0].date_time,
+        'transaction.bank_status': verifiedPayment[0].bank_status,
+        'transaction.sp_code': verifiedPayment[0].sp_code,
+        'transaction.sp_message': verifiedPayment[0].sp_message,
+        'transaction.transactionStatus': verifiedPayment[0].transaction_status,
+        'transaction.method': verifiedPayment[0].method,
+        'transaction.date_time': verifiedPayment[0].date_time,
         status:
-          verifiedPayment[0].bank_status == "Success"
-            ? "Paid"
-            : verifiedPayment[0].bank_status == "Failed"
-              ? "Pending"
-              : verifiedPayment[0].bank_status == "Cancel"
-                ? "Cancelled"
-                : "",
-      }
+          verifiedPayment[0].bank_status == 'Success'
+            ? 'Paid'
+            : verifiedPayment[0].bank_status == 'Failed'
+              ? 'Pending'
+              : verifiedPayment[0].bank_status == 'Cancel'
+                ? 'Cancelled'
+                : '',
+      },
     );
   }
 
   return verifiedPayment;
 };
-
 
 /* ---------- Logic for Delete an Order from Database  ---------- */
 const deleteAnOrderFromDB = async (orderId: string) => {
