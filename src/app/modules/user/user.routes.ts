@@ -21,7 +21,7 @@ router.post(
 router.get('/all', auth(USER_ROLE.admin), UserControllers.getAllUsers);
 
 // -----------Get Single User
-router.get('/:userId', auth(USER_ROLE.user), UserControllers.getSingleUser);
+router.get('/:userId', auth(USER_ROLE.admin, USER_ROLE.user), UserControllers.getSingleUser);
 // -----------Change Password
 router.patch(
   '/change-password',
