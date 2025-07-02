@@ -17,7 +17,7 @@ const userSchema = new Schema<TUser, UserModel>(
     password: {
       type: String,
       required: true,
-      select: 0,
+      select: false, 
     },
     role: {
       type: String,
@@ -29,11 +29,27 @@ const userSchema = new Schema<TUser, UserModel>(
       type: Boolean,
       default: false,
     },
+    bio: { type: String },
+    phone: { type: String },
+    dateOfBirth: { type: String },
+    gender: { type: String, enum: ['male', 'female', 'other'] },
+    address: {
+      street: { type: String },
+      city: { type: String },
+      state: { type: String },
+      postalCode: { type: String },
+      country: { type: String },
+    },
+    website: { type: String },
+    occupation: { type: String },
+    company: { type: String },
+    timezone: { type: String },
+    language: { type: String },
   },
   {
     timestamps: true,
     versionKey: false,
-  },
+  }
 );
 
 /* --------------- Document Middleware ------------------------- */
