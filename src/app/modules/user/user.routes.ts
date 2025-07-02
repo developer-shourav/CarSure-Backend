@@ -33,7 +33,7 @@ router.patch(
 // -----------Update User Information
 router.patch(
   '/update-info',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.admin),
   validateRequest(userValidation.updateUserInfoSchema),
   UserControllers.updateUserInfo,
 );
