@@ -116,16 +116,19 @@ const refreshDashboardDataFromDB = async () => {
   const monthlyUserGrowth = Array.from({ length: 6 }, (_, i) => {
     const d = new Date();
     d.setMonth(d.getMonth() - i);
-    const monthName = monthNames[d.getMonth()];
+    const monthIndex = d.getMonth();
     const year = d.getFullYear();
+
     const monthData = monthlyUserGrowthData.find(
-      (data) => data._id.year === year && data._id.month === d.getMonth() + 1,
+      (data) => data._id.year === year && data._id.month === monthIndex + 1
     );
+
     return {
-      month: monthName,
+      month: monthNames[monthIndex],
       users: monthData ? monthData.count : 0,
     };
   }).reverse();
+
 
   const last8Users = await User.find()
     .sort({ createdAt: -1 })
