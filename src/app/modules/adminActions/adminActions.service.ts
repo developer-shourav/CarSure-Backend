@@ -81,7 +81,7 @@ const getDashboardDataFromDB = async () => {
   const sixMonthsAgo = new Date();
   sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 
-  const monthlyUserGrowth = await User.aggregate([
+  const monthlyUserGrowthData = await User.aggregate([
     {
       $match: {
         createdAt: { $gte: sixMonthsAgo },
@@ -100,6 +100,36 @@ const getDashboardDataFromDB = async () => {
       $sort: { '_id.year': 1, '_id.month': 1 },
     },
   ]);
+
+  // Format the user growth data
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  const monthlyUserGrowth = Array.from({ length: 6 }, (_, i) => {
+    const d = new Date();
+    d.setMonth(d.getMonth() - i);
+    const monthName = monthNames[d.getMonth()];
+    const year = d.getFullYear();
+    const monthData = monthlyUserGrowthData.find(
+      (data) => data._id.year === year && data._id.month === d.getMonth() + 1,
+    );
+    return {
+      month: monthName,
+      newRegister: monthData ? monthData.count : 0,
+    };
+  }).reverse();
 
   // Last 8 registered users
   const last8Users = await User.find()
