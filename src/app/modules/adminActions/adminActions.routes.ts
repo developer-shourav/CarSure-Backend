@@ -19,4 +19,11 @@ router.delete(
   AdminActionsControllers.deleteBlog,
 );
 
+// -----------Get Dashboard Data By Admin------------
+router.get(
+  '/dashboard',
+  auth(USER_ROLE.admin),
+  AdminActionsControllers.getDashboardData,
+);
+
 export const AdminActionsRoutes = router;

@@ -27,7 +27,19 @@ const deleteBlog = catchAsync(async (req, res) => {
   });
 });
 
+/* ----------------------GET DASHBOARD DATA----------------- */
+const getDashboardData = catchAsync(async (req, res) => {
+  // will call service function to send this data
+  const data = await AdminActionsServices.getDashboardDataFromDB();
+
+  sendResponse(res, httpStatus.OK, {
+    message: 'Dashboard data retrieved successfully',
+    data,
+  });
+});
+
 export const AdminActionsControllers = {
   blockUser,
   deleteBlog,
+  getDashboardData,
 };
