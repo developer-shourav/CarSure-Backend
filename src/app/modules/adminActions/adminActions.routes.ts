@@ -26,4 +26,11 @@ router.get(
   AdminActionsControllers.getDashboardData,
 );
 
+// -----------Refresh Dashboard Data By Admin------------
+router.post(
+  '/dashboard/refresh',
+  auth(USER_ROLE.admin),
+  AdminActionsControllers.refreshDashboardData,
+);
+
 export const AdminActionsRoutes = router;

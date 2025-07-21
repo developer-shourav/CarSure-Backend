@@ -4,6 +4,7 @@ import { User } from '../user/user.model';
 import { Blog } from '../blog/blog.model';
 import { Car } from '../car/car.model';
 import { Order } from '../order/order.model';
+import { DashboardStats } from './dashboardStats.model';
 
 /* --------Logic For Block An User------ */
 const blockUserFromDB = async (id: string) => {
@@ -45,39 +46,45 @@ const deleteBlogFromDB = async (id: string) => {
   return result;
 };
 
-/* --------Logic For get dashboard data------ */
-const getDashboardDataFromDB = async () => {
-  // Existing counts
+/* --------Logic for refreshing dashboard data------ */
+const refreshDashboardDataFromDB = async () => {
+  // ... (The aggregation logic from before)
   const totalUsers = await User.countDocuments();
   const totalCars = await Car.countDocuments();
-  const totalOrders = await Order.countDocuments();
-  const totalBlogs = await Blog.countDocuments();
 
-  // Order status counts
-  const totalPendingOrders = await Order.countDocuments({ status: 'Pending' });
-  const totalCancelledOrders = await Order.countDocuments({
-    status: 'Cancelled',
-  });
-  const totalDeliveredOrders = await Order.countDocuments({
-    status: { $in: ['Shipped', 'Completed'] },
-  });
-  const totalPaidOrders = await Order.countDocuments({ status: 'Paid' });
-
-  // Total sales
-  const totalSalesData = await Order.aggregate([
+  const orderData = await Order.aggregate([
     {
-      $match: { status: { $in: ['Paid', 'Completed', 'Shipped'] } },
-    },
-    {
-      $group: {
-        _id: null,
-        total: { $sum: '$totalPrice' },
+      $facet: {
+        totalOrders: [{ $count: 'count' }],
+        totalPendingOrders: [
+          { $match: { status: 'Pending' } },
+          { $count: 'count' },
+        ],
+        totalCancelledOrders: [
+          { $match: { status: 'Cancelled' } },
+          { $count: 'count' },
+        ],
+        totalDeliveredOrders: [
+          { $match: { status: { $in: ['Shipped', 'Completed'] } } },
+          { $count: 'count' },
+        ],
+        totalPaidOrders: [
+          { $match: { status: 'Paid' } },
+          { $count: 'count' },
+        ],
+        totalSales: [
+          { $match: { status: { $in: ['Paid', 'Completed', 'Shipped'] } } },
+          { $group: { _id: null, total: { $sum: '$totalPrice' } } },
+        ],
+        last8Orders: [
+          { $sort: { createdAt: -1 } },
+          { $limit: 8 },
+          { $project: { _id: 1, status: 1, totalPrice: 1 } },
+        ],
       },
     },
   ]);
-  const totalSales = totalSalesData.length > 0 ? totalSalesData[0].total : 0;
 
-  // Monthly user growth for the last 6 months
   const sixMonthsAgo = new Date();
   sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 
@@ -101,7 +108,6 @@ const getDashboardDataFromDB = async () => {
     },
   ]);
 
-  // Format the user growth data
   const monthNames = [
     'January',
     'February',
@@ -131,36 +137,42 @@ const getDashboardDataFromDB = async () => {
     };
   }).reverse();
 
-  // Last 8 registered users
   const last8Users = await User.find()
     .sort({ createdAt: -1 })
     .limit(8)
     .select('name email');
 
-  // Last 8 orders
-  const last8Orders = await Order.find()
-    .sort({ createdAt: -1 })
-    .limit(8)
-    .select('_id status totalPrice');
-
-  return {
+  const stats = {
     totalUsers,
     totalCars,
-    totalOrders,
-    totalBlogs,
-    totalPendingOrders,
-    totalCancelledOrders,
-    totalDeliveredOrders,
-    totalPaidOrders,
-    totalSales,
+    totalOrders: orderData[0].totalOrders[0]?.count || 0,
+    totalPendingOrders: orderData[0].totalPendingOrders[0]?.count || 0,
+    totalCancelledOrders: orderData[0].totalCancelledOrders[0]?.count || 0,
+    totalDeliveredOrders: orderData[0].totalDeliveredOrders[0]?.count || 0,
+    totalPaidOrders: orderData[0].totalPaidOrders[0]?.count || 0,
+    totalSales: orderData[0].totalSales[0]?.total || 0,
     monthlyUserGrowth,
     last8Users,
-    last8Orders,
+    last8Orders: orderData[0].last8Orders,
   };
+
+  await DashboardStats.findOneAndUpdate({}, { stats, lastUpdatedAt: new Date() }, { upsert: true });
+
+  return stats;
+};
+
+/* --------Logic For get dashboard data------ */
+const getDashboardDataFromDB = async () => {
+  const dashboardData = await DashboardStats.findOne();
+  if (!dashboardData) {
+    return refreshDashboardDataFromDB();
+  }
+  return dashboardData.stats;
 };
 
 export const AdminActionsServices = {
   blockUserFromDB,
   deleteBlogFromDB,
   getDashboardDataFromDB,
+  refreshDashboardDataFromDB,
 };

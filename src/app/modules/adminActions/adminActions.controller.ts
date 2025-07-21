@@ -38,8 +38,20 @@ const getDashboardData = catchAsync(async (req, res) => {
   });
 });
 
+/* ----------------------REFRESH DASHBOARD DATA----------------- */
+const refreshDashboardData = catchAsync(async (req, res) => {
+  // will call service function to send this data
+  const data = await AdminActionsServices.refreshDashboardDataFromDB();
+
+  sendResponse(res, httpStatus.OK, {
+    message: 'Dashboard data refreshed successfully',
+    data,
+  });
+});
+
 export const AdminActionsControllers = {
   blockUser,
   deleteBlog,
   getDashboardData,
+  refreshDashboardData,
 };
