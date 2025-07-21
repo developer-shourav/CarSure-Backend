@@ -109,18 +109,8 @@ const refreshDashboardDataFromDB = async () => {
   ]);
 
   const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
   ];
 
   const monthlyUserGrowth = Array.from({ length: 6 }, (_, i) => {
@@ -133,7 +123,7 @@ const refreshDashboardDataFromDB = async () => {
     );
     return {
       month: monthName,
-      newRegister: monthData ? monthData.count : 0,
+      users: monthData ? monthData.count : 0,
     };
   }).reverse();
 
